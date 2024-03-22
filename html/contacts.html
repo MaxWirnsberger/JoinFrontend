@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join</title>
+    <link rel="icon" href="../assets/img/logos/JoinLogo.png" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/sideBar.css" />
+    <link rel="stylesheet" href="../css/contacts.css" />
+    <link rel="stylesheet" href="../css/contactsNewContacOverlayer.css" />
+    <link rel="stylesheet" href="../css/contactsResponse.css" />
+    <link rel="stylesheet" href="../css/inter.css" />
+    <link rel="stylesheet" href="../css/openSans.css" />
+
+    <script src="../js/contacts.js"></script>
+    <script src="../js/renderContacts.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/undersides.js"></script>
+  </head>
+  <body onload="contactInit()">
+    <div w3-include-html="../assets/tamplets/header.html"></div>
+    <div w3-include-html="../assets/tamplets/sideBar.html"></div>
+    <section id="newContact_bg" class="newContact_bg display_none">
+      <div class="newContactField">
+        <div class="newContactField_left" id="newContactField_left"></div>
+        <div class="newContact_cycle" id="newContact_cycle"></div>
+        <div class="newContactField_right">
+          <div>
+            <a class="closeButton" onclick="closeButton()"
+              ><img
+                src="../assets/img/contact_icons/contact_mini_icons/Close.svg"
+            /></a>
+            <div id="contactForm"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="saveOrChangeNotification">Contact succesfully created</div>
+
+    <section class="contact_section">
+      <!-- left Container -->
+      <div class="left_container" id="left_container">
+        <button id="addContactButton" onclick="openNewContactDialog()">
+          Add new contact
+          <img
+            src="../assets/img/contact_icons/person_add.png"
+            alt="plus Person"
+          />
+        </button>
+
+        <button id="addContactButtonResponse" onclick="openNewContactDialog()">
+          <img
+            src="../assets/img/contact_icons/person_add.png"
+            alt="plus Person"
+          />
+        </button>
+
+        <div class="contact_List" id="contact_List"></div>
+      </div>
+
+      <!-- right Container -->
+      <!-- Header of the right side -->
+      <div class="right_container" id="right_container">
+        <div class="contact_card">
+          <div class="contact_headline">
+            <h1>Contacts</h1>
+            <hr class="headline_Seperator" />
+            <span>Better with a team</span>
+            <hr class="response_Seperator" />
+          </div>
+        </div>
+        <a id="backArrow" onclick="rensponseBackToList()">
+          <img src="../assets/img/contact_icons/backarrow.png" />
+        </a>
+
+        <!-- automated created content of the right side -->
+        <div id="contact_overview" class="contact_overview">
+          <div class="contact_name">
+            <div id="big_circle" class="big_circle"></div>
+            <div class="name_width">
+              <div id="name_rightContainer" class="name_rightContainer"></div>
+              <div class="edit_delete" id="edit_delete"></div>
+            </div>
+          </div>
+
+          <div class="contact_information">Contact Information</div>
+          <div class="email_rightContainer" id="email_rightContainer"></div>
+          <div class="phone_rightContainer" id="phone_rightContainer"></div>
+        </div>
+
+        <button
+          id="editRemoveButtonResponse"
+          onclick="showEditDeletOverlayButton()"
+        >
+          <img
+            src="../assets/img/contact_icons/contact_mini_icons/more_vert.png"
+            alt="Edit Remove Person"
+          />
+        </button>
+
+        <div id="editDeletOverlay" class="editDeletOverlay"></div>
+      </div>
+    </section>
+  </body>
+</html>

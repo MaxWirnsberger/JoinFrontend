@@ -1,0 +1,341 @@
+@media (max-width: 1200px) {
+  .name_width {
+    width: auto;
+  }
+
+  .contact_headline h1 {
+    font-size: 50px;
+  }
+
+  .big_circle {
+    min-width: 120px;
+    min-height: 120px;
+  }
+
+  #addContactButton {
+    width: 300px;
+  }
+
+  .contact_List {
+    width: 300px;
+  }
+
+  .name_contant {
+    width: 300px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .contact_name {
+    gap: 45px;
+  }
+
+  .newContactForm input {
+    width: auto;
+  }
+
+  .newContactButtons {
+    gap: 8px;
+  }
+
+  .cancelButton {
+    font-size: 21px !important;
+  }
+
+  .createButton {
+    padding: 5px;
+    height: 61px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .contact_headline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headline_Seperator {
+    height: auto;
+    width: 59px;
+  }
+
+  .contact_name {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contact_card {
+    margin: 80px 16px 0 40px;
+  }
+
+  .contact_overview {
+    margin-left: 40px;
+  }
+
+  .newContactField_left h2 {
+    font-size: 50px;
+  }
+
+  .newContactField_left span {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 830px) {
+  #addContactButton {
+    max-width: 200px;
+  }
+
+  .contact_List {
+    max-width: 200px;
+  }
+
+  .name_contant {
+    max-width: 200px;
+    gap: 8px;
+  }
+
+  .nameIcon_leftContainer {
+    margin-left: 3px;
+  }
+
+  .name_leftContainer {
+    font-size: 16px;
+  }
+
+  .email_leftContainer {
+    max-width: 200px;
+    line-break: anywhere;
+  }
+}
+
+@media (max-width: 750px) {
+  .left_container {
+    padding: 0;
+  }
+
+  .contact_section {
+    padding: 0;
+  }
+
+  .left_container {
+    width: 100vw;
+    height: calc(100vh - 175px);
+  }
+
+  .right_container {
+    display: none;
+    height: calc(100vh - 180px);
+  }
+
+  .display_block {
+    display: block !important;
+  }
+
+  .display_none {
+    display: none !important;
+  }
+
+  #addContactButton {
+    display: none;
+  }
+
+  #addContactButtonResponse {
+    display: flex;
+  }
+
+  .contact_List {
+    max-width: 100vh;
+    width: 90%;
+  }
+
+  .name_contant {
+    max-width: 100vh;
+    width: 100%;
+  }
+
+  .email_leftContainer {
+    line-break: normal;
+  }
+
+  .nameIcon_leftContainer {
+    margin-left: 20px;
+  }
+
+  .name_contant {
+    gap: 35px;
+  }
+
+  .contact_card {
+    margin: 30px 16px 0 16px;
+  }
+
+  .contact_name {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .big_circle {
+    min-width: 80px;
+    min-height: 80px;
+    width: 80px;
+    height: 80px;
+    font-size: 27px;
+  }
+
+  .name_rightContainer {
+    font-size: 36px;
+  }
+
+  .headline_Seperator {
+    display: none;
+  }
+
+  .response_Seperator {
+    display: block;
+  }
+
+  .contact_headline {
+    gap: 8px;
+  }
+
+  .contact_overview {
+    margin-left: 16px;
+  }
+
+  #backArrow {
+    display: block;
+  }
+
+  .contact_information {
+    margin: 21px 0 21px 0;
+  }
+
+  .newContactField {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newContactField_left {
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 0;
+    max-height: 352px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .newContactLogo {
+    display: none;
+  }
+
+  .newContactField_left h2 {
+    font-size: 47px;
+    padding-left: 24px;
+  }
+
+  .newContactField_left span {
+    padding-left: 24px;
+  }
+
+  .newContactField_left hr {
+    margin-left: 24px;
+  }
+
+  .newContact_cycle {
+    margin-top: 0;
+    min-height: 120px;
+    min-width: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+  }
+
+  .closeButton {
+    display: none;
+  }
+
+  .newContactForm {
+    gap: 15px;
+    padding: 0;
+    width: 85vw;
+    transform: translate(0%, -10%);
+  }
+
+  .newContactButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cancelButton {
+    display: none;
+  }
+
+  .createButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 202px;
+    height: 51px;
+    margin-top: 32px;
+    padding: 18px, 10px, 18px, 10px;
+  }
+
+  #editRemoveButtonResponse {
+    display: flex;
+  }
+
+  #closeResponse {
+    display: flex;
+  }
+
+  .edit_delete {
+    display: none;
+  }
+
+  #saveOrChangeNotification {
+    font-size: 16px;
+    width: auto;
+    top: calc(100vh - 250px);
+    right: calc(50vw - 130px);
+  }
+}
+
+@media (max-width: 370px) {
+  .email_leftContainer {
+    line-break: anywhere;
+  }
+}
+
+@media (max-height: 890px) {
+  .newContactField_left h2 {
+    padding-top: 0;
+    font-size: 40px;
+  }
+
+  .newContactField {
+    height: 90vh;
+}
+
+.newContactField_left {
+  max-height: 280px;
+}
+
+.newContactForm {
+  height: 260px;
+  transform: translate(0%);
+}
+
+.createButton {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+}

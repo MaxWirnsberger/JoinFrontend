@@ -1,0 +1,141 @@
+@media (max-width: 1750px) {
+  .section_board_content {
+    padding-left: calc(8% + 232px);
+    padding-right: 1%;
+  }
+}
+
+@media (max-width: 1550px) {
+  .section_board_content {
+    padding-left: calc(3% + 232px);
+    padding-right: 1%;
+  }
+}
+
+@media (max-width: 1450px) {
+  .section_board_content {
+    padding-left: calc(232px);
+    padding-right: 1%;
+  }
+}
+
+@media (max-width: 1400px) {
+  .boardDiv {
+    display: block;
+    padding-bottom: 0;
+  }
+
+  .boardTab {
+    width: 100%;
+    padding-top: 26px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .cardPosition {
+    min-height: 48px;
+  }
+
+  #doneCards {
+    padding-bottom: 80px;
+  }
+
+  .cardPosition {
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .emptyTasks {
+    width: 100%;
+  }
+
+  .responseDragAndDropButton {
+    display: block;
+    position: relative;
+  }
+}
+
+@media (max-width: 1200px) {
+  .header_button_area form {
+    display: none;
+  }
+  .response_searchbar {
+    display: block;
+  }
+
+  .searching_form {
+    width: 95%;
+  }
+
+  .boardDiv {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 750px) {
+  .section_board_content {
+    padding-left: 16px;
+  }
+
+  .category {
+    font-size: 16px;
+  }
+
+  .cardDetails_titel h2 {
+    font-size: 36px;
+  }
+
+  .cardDetails_description {
+    font-size: 16px;
+  }
+
+  .assignedToCard {
+    font-size: 16px;
+  }
+
+  .subtasksCard {
+    font-size: 16px;
+  }
+
+  .renderSubtasksToCard {
+    font-size: 16px;
+  }
+
+  #doneCards {
+    padding-bottom: 120px;
+  }
+
+  .wrapperOverlay {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .responseAddTaskButton {
+    display: flex;
+  }
+
+  .AddTaskButton {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .searching_form {
+    width: 90%;
+  }
+}
+
+@media (max-width: 380px) {
+  .cardDetails_titel h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-height: 850px) {
+  .cardDetails_content {
+    max-height: 500px;
+  }
+}

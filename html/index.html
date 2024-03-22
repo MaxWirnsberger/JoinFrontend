@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="icon" href="../assets/img/logos/JoinLogo.png">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/indexResponsive.css">
+    <link rel="stylesheet" href="../css/inter.css">
+    <link rel="stylesheet" href="../css/keyframeAnimation.css">
+    <link rel="stylesheet" href="../css/signUp.css">
+    <link rel="stylesheet" href="../css/signUpResponsive.css">
+    <script src="../js/index.js"></script>
+    <script src="../js/indexHelpFunctions.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/undersides.js"></script>
+</head>
+<body onload="initLogIn()">
+    <!-- HEADER -->
+    <div id="index-top-section" class="index-top-section">
+        <div class="keyframe-logo">
+            <img class="join-logo-log-in" src="../assets/img/logos/JoinLogoDark.png">
+        </div>
+        <div class="top-section-right">
+            <span>Not a Join user?</span>
+            <button onclick="openSignUpWindow()" class="sign-up-button cursor">Sign up</button>
+        </div>
+    </div>
+    <!-- MAIN CONTAINER -->
+<div id="background-element" class="background-element">
+    <div class="index-main-section">
+        <div class="log-in-box">
+            <div class="log-in-box-headline">
+                <h1 class="headline">Log in</h1>
+                <div class="distance-line"></div>
+            </div>
+            <form onsubmit="logInUser(); return false;">
+            <div class="input-section">
+                <div id="inputDivRedBorderLogInEmail" class="input-div">
+                    <input required id="emailLogIn" class="input-field cursor" type="email" placeholder="Email" autocomplete="username">
+                    <img class="input-img cursor" src="../assets/img/signUp_icons/mail.png">
+                </div>
+                <div id="emailErrorMessageLogIn" class="error-message-section-log-in"></div>
+                <div id="inputDivRedBorderLogInPassword" class="input-div">
+                    <input required id="passwordLogIn" class="input-field cursor" type="password" placeholder="Password" autocomplete="new-password" oninput="checkInputLogIn()">
+                    <img id="passwordLogInImg" class="input-img cursor" src="../assets/img/signUp_icons/lock.png">
+                </div>
+                <div id="passwordErrorMessageLogIn" class="error-message-section-log-in"></div>
+                <div class="checkbox-section">
+                    <input id="remember-me" name="remember-me" class="cursor checkbox-input" type="checkbox">
+                    <label for="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                </div>
+            </div>
+            <div class="login-button-section">
+                <button id="logInButton" class="log-in-button cursor">Log in</button>
+                <button onclick="guestLogIn()" class="guest-log-in-button cursor">Guest Log in</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="mobile-sign-up-button-section">
+        <span>Not a Join user?</span>
+        <button onclick="openSignUpWindow()" class="sign-up-button cursor">Sign up</button>
+    </div>
+    <!-- FOOTER -->
+    <div class="index-footer-section">
+        <a href="#" class="footer-link cursor" onclick="openNewTab('privacyPolice_notLoggedIn.html')">Privacy Policy</a>
+        <a href="#" class="footer-link cursor" onclick="openNewTab('legalNotice_ notLoggedIn.html')">Legal Notice</a>
+    </div>
+</div>
+</body>
+</html>

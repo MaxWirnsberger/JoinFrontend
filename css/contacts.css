@@ -1,0 +1,361 @@
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #F6F7F8;
+  border-radius: 10px;
+  border: solid 2px #A8A8A8;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  border: 2px solid #bbc3ba;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #29abe2;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter";
+}
+
+.contact_section {
+  padding-left: 200px;
+  display: flex;
+}
+
+.left_container {
+  width: 456px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 32px 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+  height: calc(100vh - 160px);
+  z-index: 1;
+}
+
+#addContactButton {
+  padding: 12px 0 12px 0;
+  border-radius: 10px;
+  height: 56px;
+  width: 352px;
+  background-color: #2a3647;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+#addContactButtonResponse {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: #2a3647;
+  border-radius: 100%;
+  padding: 12px;
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+}
+
+#addContactButtonResponse:hover {
+  background-color: #29abe2;
+  border: 1px solid #29abe2;
+}
+
+#editRemoveButtonResponse{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: #2a3647;
+  border-radius: 100%;
+  padding: 12px;
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+}
+
+#editRemoveButtonResponse:hover{
+  background-color: #29abe2;
+  border: 1px solid #29abe2;
+}
+
+.editDeletOverlay {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  border-radius: 20px 20px 0px 20px;
+  padding: 10px;
+  position: fixed;
+  bottom: 110px;
+  right: 30px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.editDeletOverlayButton {
+  height: 40px;
+  width: 96px;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  justify-content: start;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.editDeletOverlayButton:hover {
+  background-color: #EEEEEE;
+}
+
+.editDeletOverlayIMG{
+  height: 24px;
+  width: 24px;
+}
+
+.contact_List {
+  padding: 16px;
+  width: 352px;
+  overflow: auto;
+}
+
+.first_Latter {
+  padding: 17px 36px 17px 36px;
+  font-size: 20px;
+}
+
+.name_Seperator {
+  border-top: 1px solid #d1d1d1;
+}
+
+.name_contant {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 35px;
+  height: 78px;
+  width: 352px;
+  cursor: pointer;
+}
+
+.name_contant:hover {
+  background-color: #f6f7f8;
+  border-radius: 16px;
+  color: black;
+}
+
+.nameIcon_leftContainer {
+  border-radius: 100%;
+  min-width: 42px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  color: white;
+  margin-left: 20px;
+}
+
+.name_leftContainer {
+  font-size: 20px;
+}
+
+.email_leftContainer {
+  font-size: 16px;
+  color: #007cee;
+}
+
+.centersizer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.activeName {
+  background-color: #2a3647;
+  border-radius: 16px;
+  color: white;
+}
+
+.activeName:hover {
+  background-color: #2a3647 !important;
+  color: white;
+}
+
+.right_container {
+  background-color: #f6f7f8;
+  width: 100vw;
+}
+
+.contact_card {
+  margin: 80px 16px 0 80px;
+}
+
+.contact_headline {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.contact_headline h1 {
+  font-size: 61px;
+  margin: 0;
+}
+
+.contact_headline span {
+  font-size: 27px;
+}
+
+.headline_Seperator {
+  margin: 0;
+  border: 3px solid #29abe2;
+  height: 59px;
+}
+
+.response_Seperator {
+  display: none;
+  margin: 0;
+  border: 3px solid #29abe2;
+  width: 90px;
+  margin-top: 16px;
+}
+
+.contact_headline span {
+  display: flex;
+  align-items: center;
+}
+
+.contact_overview {
+  display: none;
+  flex-direction: column;
+  margin-left: 80px;
+  margin-right: 8px;
+  margin-top: 50px;
+}
+
+.display_flex {
+  display: flex!important;
+}
+
+.display_none {
+    display: none!important;
+  }
+
+.contact_name {
+  display: flex;
+  align-items: center;
+  gap: 54px;
+}
+
+.big_circle {
+  width: 120px;
+  height: 120px;
+  font-size: 47px;
+  font-weight: 500;
+  line-height: 56.4px;
+  border: solid 2px white;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name_rightContainer {
+  font-size: 47px;
+  font-weight: 500;
+  text-transform: capitalize;
+  width: 100%;
+}
+
+.edit_delete {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  cursor: pointer;
+}
+
+.edit_delete a {
+  display: flex;
+  align-items: center;
+}
+
+.contact_information {
+  font-size: 20px;
+  margin: 32px 0 32px 0;
+}
+
+.email_rightContainer {
+  padding: 16px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.email_rightContainer span {
+  font-weight: bold;
+}
+
+.email_rightContainer a {
+  color: #007cee;
+  text-decoration: none;
+}
+
+.phone_rightContainer {
+  padding: 16px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.phone_rightContainer span {
+  font-weight: bold;
+}
+
+.phone_rightContainer a {
+  text-decoration: none;
+  color: black;
+}
+
+#backArrow {
+  display: none;
+  position: absolute;
+  top: 128px;
+  right: 16px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+#saveOrChangeNotification{
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #2A3647;
+  border-radius: 20px;
+  padding: 25px 30px 25px 30px;
+  color: white;
+  font-size: 20px;
+  width: 326px;
+  position: absolute;
+  top: calc(100vh - 200px);
+  right: calc(50vw - 200px);
+  z-index: 99999;
+}

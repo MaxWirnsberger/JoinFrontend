@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="icon" href="../assets/img/logos/JoinLogo.png">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/indexResponsive.css">
+    <link rel="stylesheet" href="../css/signUp.css">
+    <link rel="stylesheet" href="../css/signUpResponsive.css">
+    <link rel="stylesheet" href="../css/inter.css">
+    <link rel="stylesheet" href="../css/keyframeAnimation.css">
+    <script src="../js/index.js"></script>
+    <script src="../js/indexHelpFunctions.js"></script>
+    <script src="../js/storage.js"></script>
+    <script src="../js/undersides.js"></script>
+</head>
+<body id="body" onload="initSignUp()">
+    <!-- HEADER -->
+    <div class="index-top-section-sign-up">
+        <div>
+            <img class="join-logo" src="../assets/img/logos/JoinLogoDark.png">
+        </div>
+    </div>
+    <!-- MAIN CONTAINER -->
+    <div id="index-main-section" class="index-main-section-sign-up">
+        <div id="sign-up-box" class="sign-up-box">
+            <div class="sign-up-box-top-section">
+                <div class="get-back-arrow">
+                    <a href="index.html"><img src="../assets/img/signUp_icons/getBackArrow.png"></a>
+                </div>
+                <div class="sign-up-box-headline">
+                    <h1 class="headline-sign-up">Sign up</h1>
+                    <div class="distance-line-sign-up"></div>
+                </div>
+            </div>
+            <form onsubmit="userSignUp(); return false;">
+            <div class="input-section-sign-up">
+                    <div class="input-div-sign-up">
+                        <input required id="userName" class="input-field-sign-up cursor" type="text" placeholder="Vollständiger Name" autocomplete="username">
+                        <img class="input-img cursor" src="../assets/img/signUp_icons/person.png">
+                    </div>
+                    <div id="inputEmailDivRedBorderSignUp" class="input-div-sign-up">
+                        <input required id="email" class="input-field-sign-up cursor" type="email" placeholder="Email" autocomplete="username">
+                        <img class="input-img cursor" src="../assets/img/signUp_icons/mail.png">
+                    </div>
+                    <div id="emailErrorMessageSignUp" class="error-message-section-sign-up"></div>
+                    <div class="input-div-sign-up">
+                        <input required id="password" class="input-field-sign-up cursor" type="password" placeholder="Password" autocomplete="new-password" oninput="checkInputSignUp()">
+                        <img id="passwordInputImg" class="input-img cursor" src="../assets/img/signUp_icons/lock.png">
+                    </div>
+                    <div id="inputPasswordDivRedBorderSignUp" class="input-div-sign-up">
+                        <input required id="checkPassword" class="input-field-sign-up cursor" type="password" placeholder="Confirm Password" autocomplete="new-password" oninput="checkInputSignUp()">
+                        <img id="checkPasswordInputImg"  class="input-img cursor" src="../assets/img/signUp_icons/lock.png">
+                    </div>
+                    <div id="passwordErrorMessageSignUp" class="error-message-section-sign-up"></div>
+                <div id="inputCheckboxDivRedBorderSignUp" class="sign-up-checkbox-section">
+                    <input id="accept-privacy-police" name="accept-privacy-police" class="cursor checkbox-input" type="checkbox">
+                    <label for="accept-privacy-police">
+                        <span>I accept the</span>
+                    </label>
+                    <a href="#" class="sign-up-checkbox-link cursor" onclick="openNewTab('privacyPolice_notLoggedIn.html')">Privacy Police</a>
+                </div>
+                <div id="checkboxErrorMessageSignUp" class="error-message-section-sign-up"></div>
+            </div>
+            <div class="sign-up-button-section">
+                <button id="signUpButton" class="sign-up-button cursor">Sign up</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <div id="keyframeSignUp" class="keyframe-sign-up">
+        <img src="../assets/img/signUp_icons/signUpSuccessfully.png">
+    </div>
+    <div class="sign-up-footer-section">
+        <a href="#" class="footer-link cursor" onclick="openNewTab('privacyPolice_notLoggedIn.html')">Privacy Policy</a>
+        <a href="#" class="footer-link cursor" onclick="openNewTab('legalNotice_ notLoggedIn.html')">Legal Notice</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<section class="section_addTask">
+  <h1>Add Task</h1>
+  <form id="addTaksForm" class="addTaksForm" onsubmit="addTaskTest(); return false;">
+    <div class="mainContent d_flex">
+
+      <div class="leftContent">
+        <p>Title<span class="required">*</span></p>
+        <input class="OverlayerInput" required type="text" id="taskTitle" placeholder="Enter a title" />
+        <p>Description</p>
+        <textarea class="textareaOverlayer" id="taskDescription" cols="30" rows="10"
+          placeholder="Enter a description"></textarea>
+        <p>Assigned to</p>
+        <div class="assignedContainer">
+          <input class="OverlayerInput arrowNotactive" onclick="openAssignedInput()" class="assignedInput inputArrow"
+            type="text" id="assignedInput" placeholder="Select contacts to assign" />
+          <div class="contacts d_none" id="contactsOverlay">
+            <div id="contactsContent"></div>
+          </div>
+        </div>
+        <div id="badgesAssignedTo"></div>
+      </div>
+
+      <div class="seperator"></div>
+
+      <div class="rightContent">
+        <p>Due date<span class="required">*</span></p>
+        <input required class="OverlayerInput" type="date" name="" id="date" onclick="setMinDate();" />
+        <p>Prio</p>
+        <div class="prioContainer d_flex">
+          <div class="prioCard" id="prio_urgent" onclick="setPrio('urgent')">
+            <p>Urgent</p>
+            <img src="../assets/img/addTask_icons/prio_urgent.svg" />
+          </div>
+          <div class="prioCard" id="prio_medium" onclick="setPrio('medium')">
+            <p>Medium</p>
+            <img src="../assets/img/addTask_icons/prio_medium.svg" />
+          </div>
+          <div class="prioCard" id="prio_low" onclick="setPrio('low')">
+            <p>Low</p>
+            <img src="../assets/img/addTask_icons/prio_low.svg" />
+          </div>
+        </div>
+        <p>Category<span class="required">*</span></p>
+        <div class="categoryContainer">
+          <input class="OverlayerInput arrowNotactive" type="text" id="categoryInput" placeholder="Select task category"
+            onclick="openOverlay()" required />
+
+          <div class="categoryAddTask d_none" id="categoryOverlay">
+            <div id="categoryOptions">
+              <p id="optionUserStory" data-value="user_story" onclick="setCategory(this)">User Story</p>
+              <p id="optionTechnicalTask" data-value="technical_task" onclick="setCategory(this)">Technical Task</p>
+            </div>
+          </div>
+        </div>
+
+        <p>Subtasks</p>
+        <div class="SubtasksInputField">
+          <input class="OverlayerInput" type="text" placeholder="Add new subtask" id="subtaskInput"
+            oninput="renderSubtaskBtn()" />
+          <span id="subtaskAddBtn">
+            <div id="subtaskControls" class="d_flex d_none">
+              <img id="restTaskPanel" src="../assets/img/addTask_icons/subtask_close.png"
+                onclick="resetSubtaskInput()" />
+              <img id="addTaskPanel" src="../assets/img/addTask_icons/subtask_check.png" onclick="addSubtask()" />
+            </div>
+            <img src="../assets/img/addTask_icons/add_subtask.png" onclick="addSubtask()" id="add_subtaskBtn" />
+          </span>
+        </div>
+        <div id="subtaskListContainer">
+          <!-- render new subtasks -->
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footSection d_flex">
+      <div>
+        <span><span class="required">*</span>This field is required</span>
+      </div>
+      <div class="btnContainer d_flex" id="createButton">
+        <div class="clearBtn d_flex" onclick="clearInput()">
+          <span>Clear</span>
+          <img src="../assets/img/addTask_icons/cancel.png" />
+        </div>
+        <button class="createBtn d_flex" type="submit">
+          <span>Create Task</span>
+          <img src="../assets/img/addTask_icons/check.png" />
+        </button>
+      </div>
+    </div>
+
+    <div id="taskAddedOverlay" class="">
+      <div id="taskAdded">
+        <span>Task added to board</span>
+        <img src="../assets/img/addTask_icons/board_icon.svg" >
+      </div>
+    </div>
+  </form>
+
+</section>

@@ -1,0 +1,247 @@
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f6f7f8;
+  border-radius: 10px;
+  border: solid 2px #a8a8a8;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  border: 2px solid #bbc3ba;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #29abe2;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter";
+  font-size: 20px;
+  /* overflow-y: p;*/
+}
+
+.d-flex {
+  display: flex;
+}
+
+.section_board {
+  background-color: #f6f7f8;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.section_board_content{
+  padding-left: calc(8% + 232px);
+  padding-right: 9.5%;
+  height: calc(100vh - 96px);
+  max-width: 1440px;
+}
+
+.boardDiv {
+  display: flex;
+  padding-top: 48px;
+  justify-content: space-between;
+  padding-bottom: 80px;
+}
+
+.boardTab {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+
+.boardTabHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.boardTabAddButton {
+  height: 24px;
+  width: 24px;
+  margin-right: 35px;
+  border: 2px solid black;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.boardCard {
+  width: 25%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.emptyTasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px dotted #a8a8a8;
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  color: #a8a8a8;
+  height: 48px;
+  width: 90%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* transform: translateX(100%); */
+  /* transition: all 0.5s ease-in-out; */
+}
+
+.wrapperOverlay {
+  background-color: white;
+  border-radius: 20px;
+  overflow: auto;
+  margin: 10px;
+  max-height: 90vh;
+  max-width: 90vw;
+}
+
+.headSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 80px;
+}
+
+.headSection h1 {
+  font-size: 61px;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73.2px;
+  margin: 0;
+}
+
+.d_none {
+  display: none;
+}
+
+.header_button_area {
+  display: flex;
+}
+
+.searching_form {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 312px;
+  height: 48px;
+  border: 1px solid #bebebe;
+  border-radius: 10px;
+  background-color: white;
+  padding: 0px 16px;
+  cursor: pointer;
+}
+
+.searching_form input {
+  width: 100%;
+}
+
+.searching_form:focus-within {
+  border: 1px solid rgb(255, 255, 255);
+  outline: 1px solid rgb(46, 185, 255);
+}
+
+#searching_form_input {
+  border: none;
+}
+
+#searching_form_input:focus {
+  outline: none;
+}
+
+#responseSearching_form_input {
+  border: none;
+}
+
+#responseSearching_form_input:focus {
+  outline: none;
+}
+
+.search_seperator {
+  height: 31px;
+  width: 1px;
+  background-color: #d1d1d1;
+}
+
+.searching_button {
+  width: 32px;
+  height: 32px;
+  margin-left: 16px;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searching_button:hover {
+  background-color: #e4e4e4;
+}
+
+.response_searchbar {
+  display: none;
+  width: 100%;
+  padding-top: 40px;
+}
+
+.AddTaskButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  height: 48px;
+  cursor: pointer;
+  color: white;
+  background-color: #2a3647;
+  font-size: 21px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-left: 32px;
+}
+
+.AddTaskButton:hover {
+  background-color: #29abe2;
+  border-color: #29abe2;
+}
+
+.responseAddTaskButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  height: 48px;
+  cursor: pointer;
+  color: white;
+  background-color: #2a3647;
+  font-size: 21px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-left: 32px;
+}

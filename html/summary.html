@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/inter.css">
+    <link rel="stylesheet" href="../css/summary.css">
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/sideBar.css" />
+    <link rel="stylesheet" href="../css/keyframeAnimation.css" />
+    <script src="../js/script.js" defer></script>
+    <script src="../js/storage.js"defer></script>
+    <script src="../js/index.js"defer></script>
+    <script src="../js/summary.js"defer></script>
+    <script src="../js/undersides.js"></script>
+
+  <title>Join</title>
+    <link rel="icon" href="../assets/img/logos/JoinLogo.png">
+</head>
+<body onload="summaryInit()">
+    <div w3-include-html="../assets/tamplets/header.html"></div>
+    <div w3-include-html="../assets/tamplets/sideBar.html"></div>
+    <div class="section_Summary">
+        <div class="summary_headline">
+            <h1>Join 360</h1>
+            <img src="../assets/img/summary_icons/Vector 5.png">
+            <p>Key Metrics at a Glance</p>
+        </div>
+
+        <div class="summary_content">
+            <a href="board.html" class="board_link">
+            <div class="section_one">
+                <div class="todo_number">        
+                    <span class="edit_png">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.0612 22.1418H4.92787L16.4279 10.6418L14.5612 8.7751L3.0612 20.2751V22.1418ZM22.1279 8.70843L16.4612 3.10843L18.3279 1.24176C18.839 0.730653 19.4668 0.475098 20.2112 0.475098C20.9556 0.475098 21.5834 0.730653 22.0945 1.24176L23.9612 3.10843C24.4723 3.61954 24.739 4.23621 24.7612 4.95843C24.7834 5.68065 24.539 6.29732 24.0279 6.80843L22.1279 8.70843ZM20.1945 10.6751L6.0612 24.8084H0.394531V19.1418L14.5279 5.00843L20.1945 10.6751Z" fill="#fffff"/>
+                        </svg>
+                    </span>
+                    <div class="todoNumber">
+                        <p id="todos" class="number"></p>
+                        <p class="todo">To-do</p>
+                    </div>
+                </div>    
+                
+                <div class="todo_number">                        
+                     <span class="edit_png_1">
+                        <svg width="38" height="30" viewBox="0 0 38 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.92285 14.8085L15.1516 25.8745L33.8662 3.74243" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <div class="todoNumber">
+                        <p id="done" class="number"></p>
+                        <p class="todo">Done</p>
+                    </div>   
+                </div>
+            </div>
+            
+            <div class="section_two">
+                <div class="section_two_style">                     
+                    <div class="todoNumber2">
+                        <div class="urgent">
+                            <span class="edit_png_section_two">
+                                <img src="../assets/img/summary_icons/Capa 2.png">
+                            </span>
+                            <div class="x">
+                                <p id="urgent" class="number"></p>
+                                <p class="todo">Urgent</p>
+                            </div>
+                        </div>
+                        <img class="x_img" src="../assets/img/summary_icons/SectionTwoVector 5.png">
+                        <div class="timeline">
+                            <p class="date" id="date"></p>
+                            <p>Upcoming Deadline</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    
+            
+            <div class="section_three">
+                <div class="section_three_card">                         
+                    <div class="todoNumber">
+                        <p id="inBoard" class="number"></p>
+                        <p class="todo">Tasks in<br>Board</p>
+                    </div>
+                </div>    
+                    
+                <div class="section_three_card">                                  
+                    <div class="todoNumber">
+                        <p id="inProgress" class="number"></p>
+                        <p class="todo">Tasks in<br>Progress</p>
+                    </div>
+                </div>    
+                <div class="section_three_card">  
+                    <div class="todoNumber">
+                        <p id="feedback" class="number"></p>
+                        <p class="todo">Awaiting<br>Feedback</p>
+                    </div>    
+                </div>    
+            </div>
+            </a> 
+        <div class="welcomeOverlayer welcome-overlayer-class">
+            <div class="good_morning">
+                <div class="day_time" id="demo"></div>
+                <div class="user_name" id="userName"></div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
+
+    
+
+
+
+
+
+
+
+  

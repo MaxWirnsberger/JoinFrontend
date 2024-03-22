@@ -1,0 +1,227 @@
+body{
+    background-color: rgb(246,247,248);
+    font-family: 'Inter';
+    margin: 0;
+}
+form{
+    z-index: 1;
+}
+
+.d-none{
+    display: none;
+}
+
+.index-top-section{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-top: 5vh;
+    margin-right: 50px;
+    padding-bottom: 2vh;
+    font-size: 22px;
+}
+
+.sign-up-button{
+    background-color: rgb(42,55,71);
+    text-decoration: none;
+    color: white;
+    height: 49px;
+    width: 80px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sign-up-link{
+    text-decoration: none;
+    color: white;
+}
+
+.sign-up-button:hover{
+    background-color: rgb(56,171,226);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.index-main-section{
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+}
+
+.log-in-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    height: 45vh;
+    width: 40vw;
+    border-radius: 20px;
+    font-size: 30px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.log-in-box-headline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headline{
+    margin: 2vh;
+}
+
+.distance-line{
+    height: 0.3vh;
+    width: 200px;
+    background-color: rgb(56,171,226);
+}
+
+.input-section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2vh;
+    margin-top: 2vh;
+}
+
+.input-div{
+    border: 1px solid rgb(213,213,213);
+    border-radius: 10px;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+
+.input-field{
+    border: none;
+    padding-left: 20px;
+    outline: none;
+    font-size: 20px;
+    width: 22vw;
+}
+
+.input-img{
+    width: 24px;
+    height: 24px;
+    padding-right: 20px;
+}
+.error-message-section-log-in{
+    background-color: white;
+    color: red;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: -18px;
+}
+/*CHECKBOX DESIGN*/
+
+.checkbox-section{
+    font-size: 12px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    margin-left: 30px;
+    margin: 2vh;
+    height: 24px;
+}
+
+.checkbox-input {
+    display: none; 
+}
+
+.checkbox-input + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px; 
+    height: 16px; 
+    background-image: url(../assets/img/login_icons/unchecked.png); 
+    background-size: cover;
+}
+
+.checkbox-input:checked + label:before {
+    background-image: url(../assets/img/login_icons/checked.png); 
+}
+
+.checkbox-input + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.login-button-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    margin-top: 5vh;
+}
+
+
+.log-in-button{
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(42,55,71);
+    color: white;
+    width: 90px;
+    height: 48px;
+    font-size: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.log-in-button:hover{
+    background-color: rgb(56,171,226);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.guest-log-in-button{
+    border: 1px solid rgb(42,55,71);
+    border-radius: 10px;
+    width: 150px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.guest-log-in-button:hover{
+    border: 1px solid rgb(56,171,226);
+    color: rgb(56,171,226);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+.index-footer-section{
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+}
+
+
+.footer-link{
+    margin: 10px;
+    text-decoration: none;
+    color: rgb(182, 185, 187);
+    transition: all 125ms ease-in-out;
+}
+
+
+.footer-link:hover{
+    color: rgb(56,171,226);
+    transform: scale(1.1);
+}
+
+.mobile-sign-up-button-section{
+    display: none;
+}
+

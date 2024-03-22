@@ -1,0 +1,281 @@
+.responseAddTaskButton:hover{
+    background-color: #29ABE2;
+    border-color: #29ABE2;
+}
+
+.cardPosition{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 100%;
+    height: 100%;
+    gap: 16px;
+    padding-bottom: 8px;
+}
+
+/* .cardPosition::-webkit-scrollbar{
+    display: none;
+} */
+
+.dragHighlight {
+    border-style: dotted;
+    border-radius: 24px;
+}
+
+.user_cards{
+    width: 252px;
+    min-width: 252px;
+    height: 244px;
+    border-radius: 24px;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    background-color: white;
+    font-size: 16px;
+    padding: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_card_content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.cardHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.responseDragAndDropButton{
+    display: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.menuForPosition{
+    position: relative;
+}
+
+.positionNav{
+    position: absolute;
+    top: -30px;
+    right: 0px;
+    width: 150px;
+    height: 158px !important;
+    border-radius: 20px 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #2A3647;
+}
+
+.positionNav a{
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    padding: 8px 16px 8px 16px;
+}
+
+.category{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0038FF;
+    color: white;
+    border-radius: 8px;
+    padding: 4px 16px 4px 16px;
+    width: 140px;
+    height: 27px;
+}
+
+.text_content_card{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.titel_content_card{
+    height: 40px;
+    font-weight: 700;
+}
+
+.description_content_card{
+    font-weight: 400;
+    color: #A8A8A8;
+    height: 40px;
+    overflow: hidden;
+}
+
+.progress_bar_card{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin: 8px 0px;
+    gap: 10px;
+}
+
+#fileSubtask{
+    width: 60%;
+}
+
+#calcSubtask{
+    font-size: 12px;
+}
+
+.contact_prio{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.assigned_list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.assigned_list div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    border-radius: 100%;
+    border: 1px solid white;
+    color: white;
+    height: 32px;
+    width: 32px;
+    margin-left: -7px;
+}
+
+.prio_card{
+    padding: 10px 7.5px;
+}
+
+.card_details_bg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardDetails{
+    width: 525px;
+    border-radius: 30px;
+    background-color: white;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.cardDetails_content{
+    padding: 48px 40px;
+    max-height: 724px;
+    overflow: auto;
+}
+
+.cardDetails_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cardDetails_titel h2{
+    font-size: 61px;
+    font-weight: 700;
+    padding-top: 24px;
+    margin: 0;
+}
+
+.cardDetails_description{
+    display: flex;
+    gap: 25px;
+    font-size: 20px;
+    padding-top: 24px;
+}
+
+.cardDetails_description_text_width{
+    width: 92px;
+}
+
+.assignedToCard{
+    height: 150px;
+    overflow: auto;
+    font-size: 20px;
+    padding-top: 24px;
+}
+
+.assignedToCardName{
+    display: flex;
+    flex-direction: column;
+}
+
+.assignedToCardNameValue{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 15px;
+}
+
+
+.assignedToCardCyrcle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+    color: white;
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+}
+
+.subtasksCard{
+    font-size: 20px;
+    padding-top: 24px;
+}
+
+.renderSubtasksToCard{
+    font-size: 19px;
+    display: flex;
+    gap: 16px;
+    padding-top: 12px;
+    cursor: pointer;
+}
+
+.deleteEditCard{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: 24px;
+}
+
+.deleteEditCard hr{
+    height: 24px;
+}
+
+.deleteEditCardContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.renderDeleteEditCardContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.cardCloseButton{
+    cursor: pointer;
+}
