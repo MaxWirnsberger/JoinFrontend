@@ -23,7 +23,7 @@
     align-items: center;
     text-align: center;
     background-color: white;
-    height: 55vh;
+    height: auto;
     width: 35vw;
     border-radius: 20px;
     font-size: 30px;
@@ -135,6 +135,7 @@
     height: 48px;
     font-size: 20px;
     transition: transform 0.3s ease-in-out;
+    margin-bottom: 16px;
 }
 
 .sign-up-button:hover{

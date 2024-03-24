@@ -1,6 +1,7 @@
 let matchingUser;
 
 async function init() {
+  checkLogin();
   includeHTML();
   await loadUserHeader();
   checkEmailSummary(users);

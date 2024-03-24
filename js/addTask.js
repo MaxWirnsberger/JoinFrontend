@@ -15,6 +15,7 @@ let contactsRendered = false;
  * onload function to initialize the site 
  */
 async function initAddTask() {
+  checkLogin();
   await init();
   await loadTasks();
   await getContacts();

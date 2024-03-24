@@ -9,6 +9,7 @@ let activeNameList = [];
  * Initializes some functions after loading the body
  */
 async function contactInit() {
+  checkLogin();
   init();
   await loadContacts();
   filterLetter();

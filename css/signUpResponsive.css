@@ -1,9 +1,9 @@
 /*MAX HEIGHT 1400PX*/
 
 @media(max-width:1920px) and (max-height:1400px){
-    .sign-up-box{
+    /* .sign-up-box{
         height: 50vh;
-    }
+    } */
     .index-main-section-sign-up{
         padding-top: 10vh;
     }
@@ -36,7 +36,7 @@
 @media(max-width:850px) and (max-height:1400px){
     .sign-up-box{
         width: 80vw;
-        height: 48vh;
+        /* height: 48vh; */
     }
     .input-field-sign-up{
         width: 60vw;
@@ -90,9 +90,9 @@
 /*MAX HEIGHT 1100PX*/
 
 @media(max-width:1920px) and (max-height:1100px){
-    .sign-up-box{
+    /* .sign-up-box{
         height: 53vh;
-    }
+    } */
     .sign-up-footer-section{
         padding-top: 7vh;
     }
@@ -101,9 +101,9 @@
 /*MAX HEIGHT 1000PX*/
 
 @media(max-width:1920px) and (max-height:1000px){
-    .sign-up-box{
+    /* .sign-up-box{
         height: 55vh;
-    }
+    } */
     .sign-up-footer-section{
         padding-top: 4vh;
     }
@@ -115,18 +115,18 @@
     .index-main-section-sign-up{
         padding-top: 5vh;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 58vh;
-    }
+    } */
 }
 
 @media(max-width:650px) and (max-height:950px){
     .index-main-section-sign-up{
         padding-top: 20vh;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 56vh;
-    }
+    } */
     .sign-up-footer-section{
         padding-top: 8vh;
     }
@@ -138,9 +138,9 @@
     .index-main-section-sign-up{
         padding-top: 0;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 62vh;
-    }
+    } */
 }
 
 @media(max-width:650px) and (max-height:880px){
@@ -158,9 +158,9 @@
     .index-main-section-sign-up{
         padding-top: 15vh;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 65vh;
-    }
+    } */
 }
 
 @media(max-width:500px) and (max-height:800px){
@@ -180,9 +180,9 @@
 /*MAX HEIGHT 700PX*/
 
 @media(max-width:1920px) and (max-height:700px){
-    .sign-up-box{
+    /* .sign-up-box{
         height: 70vh;
-    }
+    } */
     .sign-up-footer-section{
         padding-top: 2vh;
     }
@@ -194,9 +194,9 @@
     .index-main-section-sign-up{
         padding-top: 10vh;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 75vh;
-    }
+    } */
     .headline-sign-up{
         font-size: 40px;
     }
@@ -214,9 +214,9 @@
     .index-main-section-sign-up{
         padding-top: 5vh;
     }
-    .sign-up-box{
+    /* .sign-up-box{
         height: 80vh;
-    }
+    } */
     .sign-up-button-section{
         margin-top: 4vh;
     }

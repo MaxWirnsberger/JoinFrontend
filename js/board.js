@@ -2,6 +2,7 @@
  * initiates functions in board, which are triggered when loading
  */
 async function boardInit() {
+  checkLogin();
   init();
   await loadTasks();
   valueAppender();
