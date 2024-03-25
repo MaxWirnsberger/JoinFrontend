@@ -61,7 +61,7 @@ async function loadUser(){
  * load tasks from server
  */
 async function loadTasks() {
-  // tasks = JSON.parse(await getItem("tasks"));
+  tasks = await getTasks();
 }
 
 /**

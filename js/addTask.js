@@ -27,7 +27,8 @@ async function initAddTask() {
  * fetch tasks from remoteStorage
  */
 async function loadTasks() {
-  tasks = JSON.parse(await getItem("tasks"));
+  // tasks = JSON.parse(await getItem("tasks"));
+  tasks = await getTasks();
 }
 
 /**

@@ -1,20 +1,19 @@
 let matchingUser;
-let currentUser;
 
 async function init() {
   checkLogin();
   includeHTML();
-  await loadUserHeader();
-  checkEmailSummary(users);
+  // await loadUserHeader();
+  checkEmailSummary();
 }
 
-async function loadUserHeader() {
-  try {
-    users = JSON.parse(await getItem("users"));
-  } catch (e) {
-    console.info("Could not load Users");
-  }
-}
+// async function loadUserHeader() {
+//   try {
+//     users = JSON.parse(await getItem("users"));
+//   } catch (e) {
+//     console.info("Could not load Users");
+//   }
+// }
 
 async function checkEmailSummary() {
   const guestUser = localStorage.getItem("guestUser");
@@ -28,6 +27,7 @@ async function checkEmailSummary() {
     return;
   }
 }
+
 function loadInitialsHeader(currentUser) {
   const firstLetterFirstName = currentUser.first_name.charAt(0).toUpperCase();
   const firstLetterLastName = currentUser.last_name.charAt(0).toUpperCase();

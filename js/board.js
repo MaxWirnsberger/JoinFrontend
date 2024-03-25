@@ -6,7 +6,7 @@ async function boardInit() {
   init();
   await loadTasks();
   valueAppender();
-  saveFunction();
+  // saveFunction();
   await getContacts();
   renderContacts();
 }
@@ -62,7 +62,12 @@ function filterStatus() {
 async function valueAppender() {
   for (let i = 0; i < tasks.length; i++) {
     let task = tasks[i];
-    let testSum = task["subtask"].length;
+    let testSum
+    if (task["subtask"] === null){
+      testSum = 0
+    } else {
+      testSum = task["subtask"].length;
+    }
     if ("progressValue" in task && task.progressSum != testSum) {
       let difference = task.progressSum - testSum;
       calcValuesToAppend(task, difference);
@@ -83,7 +88,12 @@ async function valueAppender() {
  * @param {number} difference
  */
 function calcValuesToAppend(task, difference) {
-  let subtasks = task["subtask"];
+  let subtasks
+  if (task["subtask"] === null){
+    subtasks = 0
+  } else {
+    subtasks = task["subtask"];
+  }
   if (difference < 0) {
     for (let i = 0; i < -difference; i++) {
       task.progressValue.push(0);
