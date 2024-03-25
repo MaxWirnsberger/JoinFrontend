@@ -7,7 +7,7 @@ let currentUser = [];
  */
 async function initLogIn() {
   await loadUser();
-  showLastUser(currentUser);
+  showLastUser();
 }
 
 /**
@@ -131,31 +131,12 @@ function logInUser() {
   const emailInput = document.getElementById("emailLogIn").value;
   const passwordInput = document.getElementById("passwordLogIn").value;
 
-  loginWithEmailandPassword(emailInput, passwordInput);
+  loginWithEmailandPassword(emailInput, passwordInput);  // function is defined in storage.js
   localStorage.setItem("checkinUser", JSON.stringify(emailInput));
   localStorage.setItem("checkinPassword", JSON.stringify(passwordInput));
   sessionStorage.clear("SignUp");
   if (checkbox.checked) {
     sessionStorage.setItem("SignUp", 2);
-  }
-}
-
-async function loginWithEmailandPassword(emailInput, passwordInput) {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const raw = JSON.stringify({ username: emailInput, password: passwordInput });
-  const requestOptions = {method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
-  try {
-    let resp = await fetch("http://127.0.0.1:8000/login/", requestOptions);
-    let json = await resp.json();
-    localStorage.setItem("token", json.token);
-    openSummary();
-  } catch (e) {
-    console.error(e);
   }
 }
 
@@ -317,29 +298,6 @@ async function succesSignUp(passwordErrorDiv, emailErrorDiv) {
     await registeredUser(emailErrorDiv);
   } else{
     passwordErrorDiv = setPasswordAlertSignUp(passwordErrorDiv);
-  }
-}
-
-async function registeredUser(emailErrorDiv) {
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  const raw = JSON.stringify({
-    email: email.value,
-    first_name: firstname.value,
-    last_name: lastname.value,
-    password: password.value,
-  });
-  const requestOptions = {method: "POST",headers: myHeaders,body: raw,redirect: "follow"}
-  try {
-    let resp = await fetch("http://127.0.0.1:8000/singup/", requestOptions);
-    let answer = await resp.json();
-    if (answer.message === "User created successfully") {
-      successSignUp()
-    } else if (answer.message === "This email already exists") {
-      setEmailAlertSignUp(emailErrorDiv)
-    }
-  } catch (e) {
-    console.error(e);
   }
 }
 

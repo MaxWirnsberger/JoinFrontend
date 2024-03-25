@@ -1,4 +1,5 @@
 let matchingUser;
+let currentUser;
 
 async function init() {
   checkLogin();
@@ -21,20 +22,15 @@ async function checkEmailSummary() {
     //document.getElementById("userName").innerHTML = "Guest";
     document.getElementById("user").innerHTML = "<b>G</b>";
   } else {
-    const emailToSearch = localStorage.getItem("checkinUser");
-    const cleanedEmailToSearch = emailToSearch.replace(/^"(.*)"$/, "$1");
-    const lowerCaseEmailToSearch = cleanedEmailToSearch.toLowerCase();
-    matchingUser = users.find((user) => {
-      return user.email.toLowerCase() === lowerCaseEmailToSearch;
-    });
-    loadInitialsHeader(matchingUser);
+    let currentUser = await getUser();
+    matchingUser = `${currentUser.first_name} ${currentUser.last_name}`
+    loadInitialsHeader(currentUser);
     return;
   }
 }
-function loadInitialsHeader(matchingUser) {
-  const [firstName, lastName] = matchingUser.name.split(" ");
-  const firstLetterFirstName = firstName.charAt(0).toUpperCase();
-  const firstLetterLastName = lastName.charAt(0).toUpperCase();
+function loadInitialsHeader(currentUser) {
+  const firstLetterFirstName = currentUser.first_name.charAt(0).toUpperCase();
+  const firstLetterLastName = currentUser.last_name.charAt(0).toUpperCase();
   document.getElementById("user").innerHTML =
     firstLetterFirstName + firstLetterLastName;
 }

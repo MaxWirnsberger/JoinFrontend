@@ -20,8 +20,8 @@ let inBoard = 0;
 let inProgress = 0;
 let feedback = 0;
 
-
 let tasks = [];
+let userFullName;
 
 /**
  * set the summary status counter to zero
@@ -51,12 +51,17 @@ async function summaryInit() {
   displayEarliestDueDate();
   renderUserName();
 }
+
+async function loadUser(){
+  let currentUser = await getUser();
+  userFullName = `${currentUser.first_name} ${currentUser.last_name}`;
+}
  
 /**
  * load tasks from server
  */
 async function loadTasks() {
-  tasks = JSON.parse(await getItem("tasks"));
+  // tasks = JSON.parse(await getItem("tasks"));
 }
 
 /**
@@ -87,7 +92,7 @@ function renderUserName() {
   if (guestUser === "Guest") {
     document.getElementById("userName").innerHTML = "Guest";
   } else {
-    document.getElementById("userName").innerHTML = matchingUser.name;
+    document.getElementById("userName").innerHTML = userFullName;
   }
 }
 
