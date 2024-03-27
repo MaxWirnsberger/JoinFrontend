@@ -178,9 +178,8 @@ function hideTaskAddedOverlay() {
  */
 function setCategory(element) {
   let input = document.getElementById('categoryInput');
-
   categoryFromAddTask = element.getAttribute('data-value');
-  input.placeholder = element.innerHTML;
+  input.value = element.innerHTML;
   openOverlay();
 }
 
@@ -304,7 +303,8 @@ function makeSubtaskEditable(subtaskText, subtaskContainer) {
 function subtaskLeaveEditModus (subtaskId, subtaskText, subtaskContainer){
   subtaskText.addEventListener("blur", function () {
     subtaskText.contentEditable = false;
-    subtasks[subtaskId] = subtaskText.innerHTML;
+    let editRightSubtask = subtasks.find(element => element.id == subtaskId)
+    editRightSubtask.title = subtaskText.innerHTML;
     subtaskContainer.classList.remove("subtaskContainerActive");
   });
 }
@@ -331,8 +331,12 @@ document.addEventListener('click', function (event) {
  * @param {number} subtaskId 
  */
 function deleteSubtask(subtaskId) {
-  let subtaskContainer = document.getElementById(`subtask_${subtaskId}`);
+  let isSubtaskInDB = subtasks.find(element => element.id == subtaskId)
+  if (isSubtaskInDB) {
+    deleteSubtaskFromDB(subtaskId)
+  }
 
+  let subtaskContainer = document.getElementById(`subtask_${subtaskId}`);
   subtasks.splice(subtaskId, 1);
   subtaskContainer.remove();
 }
@@ -341,7 +345,7 @@ function deleteSubtask(subtaskId) {
  * fetch contacts from remoteStorage
  */
 async function getContacts() {
-  contacts = JSON.parse(await getItem("contacts"));
+  // contacts = JSON.parse(await getItem("contacts"));
 }
 
 /**

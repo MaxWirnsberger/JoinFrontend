@@ -21,7 +21,8 @@ function renderCardDetails(index) {
  * @param {number} index 
  */
 function renderCardDetailsHeader(index) {
-  let category = tasks[index]["category"];
+  let findRightTask =tasks.find(element => element.id === index);
+  let category = findRightTask["category"];
   category = changeCategoryValue(category);
   let color = categoryColorCheck(category);
   let header = document.getElementById("cardDetails_header");
@@ -39,9 +40,9 @@ function renderCardDetailsHeader(index) {
  * @returns Nicer look of the category
  */
 function changeCategoryValue(category) {
-  if (category == "technical_task") {
+  if (category.name == "technical_task") {
     return "Technical Task";
-  } else if (category == "user_story") {
+  } else if (category.name == "user_story") {
     return "User Story";
   } else {
     return "Standard Task";
@@ -54,7 +55,8 @@ function changeCategoryValue(category) {
  * @param {number} index 
  */
 function renderCardDetailsTitel(index) {
-  let titelText = tasks[index]["title"];
+  let findRightTask =tasks.find(element => element.id === index);
+  let titelText = findRightTask["title"];
   let titelSection = document.getElementById("cardDetails_titel");
   titelSection.innerHTML = `<h2>${titelText}</h2>`;
 }
@@ -65,7 +67,8 @@ function renderCardDetailsTitel(index) {
  * @param {number} index 
  */
 function renderCardDetailsDescription(index) {
-  let descriptionText = tasks[index]["description"];
+  let findRightTask =tasks.find(element => element.id === index);
+  let descriptionText = findRightTask["description"];
   let descriptionSection = document.getElementById("cardDetails_description");
   descriptionSection.innerHTML = `${descriptionText}`;
 }
@@ -76,7 +79,8 @@ function renderCardDetailsDescription(index) {
  * @param {number} index 
  */
 function renderCardDetailsDate(index) {
-  let dateText = tasks[index]["date"].split("-");
+  let findRightTask =tasks.find(element => element.id === index);
+  let dateText = findRightTask["due_date"].split("-");
   let year = dateText[0];
   let month = dateText[1];
   let day = dateText[2];
@@ -90,8 +94,8 @@ function renderCardDetailsDate(index) {
  * @param {number} index 
  */
 function renderCardDetailsPriority(index) {
-  let standardPrioText = tasks[index];
-  prioText = standardPrioText["prio"];
+  let standardPrioText =tasks.find(element => element.id === index);
+  prioText = standardPrioText["priority"];
   prioText = prioText.charAt(0).toUpperCase() + prioText.slice(1);
   let prioImg = rightPrioImg(standardPrioText);
   let prioSection = document.getElementById("cardDetails_prio");
@@ -105,7 +109,8 @@ function renderCardDetailsPriority(index) {
  * @param {number} index 
  */
 function renderCardDetailsAssignedTo(index) {
-  let assignedToArray = tasks[index]["assignedTo"];
+  let findRightTask =tasks.find(element => element.id === index);
+  let assignedToArray = findRightTask["assignedTo"];
   let assignedToSection = document.getElementById("assignedToCardName");
   assignedToSection.innerHTML = ``;
   for (let i = 0; i < assignedToArray.length; i++) {
@@ -129,17 +134,39 @@ function renderCardDetailsAssignedTo(index) {
 function renderCardDetailsSubTasks(index) {
   let subTasksSection = document.getElementById("renderSubtasksToCard");
   subTasksSection.innerHTML = "";
-  let subTasks = tasks[index]["subtask"];
-  let progressValue = tasks[index]["progressValue"];
+  let subTasks = getNameOfSubtasks(index);
+  let progressValue = getProgressOfSubtasks(index);
   for (let i = 0; i < subTasks.length; i++) {
     let subTask = subTasks[i];
+    let findRightTask = tasks.find(element => element.id === index);
+    let findRightSubtaskID = findRightTask['subtasks'].find(element => element.title === subTask);
     subTasksSection.innerHTML += `
-          <div class="renderSubtasksToCard" onclick="addProgress(${index}, ${i})">
+          <div class="renderSubtasksToCard" onclick="addProgress(${index}, ${findRightSubtaskID['id']})">
               <div><img src="${progressCheckOnSubtask(progressValue[i])}" alt="" />
               </div>
               <div>${subTask}</div>
           </div>`;
   }
+}
+
+function getNameOfSubtasks(index){
+  let findRightTask =tasks.find(element => element.id === index);
+  subtaskArray = []
+  for (let i = 0; i < findRightTask["subtasks"].length; i++) {
+    const subtasks = findRightTask["subtasks"][i];
+    subtaskArray.push(subtasks["title"])
+  }
+  return subtaskArray
+}
+
+function getProgressOfSubtasks(index){
+  let findRightTask =tasks.find(element => element.id === index);
+  subtaskArray = []
+  for (let i = 0; i < findRightTask["subtasks"].length; i++) {
+    const subtasks = findRightTask["subtasks"][i];
+    subtaskArray.push(subtasks["checked"])
+  }
+  return subtaskArray
 }
 
 /**
@@ -163,13 +190,15 @@ function progressCheckOnSubtask(progressValue) {
  * @param {string} subtask 
  */
 async function addProgress(task, subtask) {
-  if (tasks[task]["progressValue"][subtask] == 0) {
-    tasks[task]["progressValue"][subtask]++;
-  } else if (tasks[task]["progressValue"][subtask] == 1) {
-    tasks[task]["progressValue"][subtask]--;
+  let findRightTask =tasks.find(element => element.id === task);
+  let findRightSubtask =findRightTask['subtasks'].find(element => element.id === subtask);
+  if (findRightSubtask['checked'] == 0) {
+    findRightSubtask['checked']++;
+  } else if (findRightSubtask['checked'] == 1) {
+    findRightSubtask['checked']--;
   }
   renderCardDetailsSubTasks(task);
-  saveFunction();
+  saveFunction(task);
 }
 
 /**

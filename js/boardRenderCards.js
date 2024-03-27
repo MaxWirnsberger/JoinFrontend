@@ -19,7 +19,7 @@ function renderCards() {
     if (todos.length > 0) {
       for (let i = 0; i < todos.length; i++) {
         let todo = todos[i];
-        renderCardFunction(status, todo, i);
+        renderCardFunction(status, todo);
       }
     } else {
       renderEmptyField(status);
@@ -36,7 +36,7 @@ function renderCards() {
     if (inProgress.length > 0) {
       for (let i = 0; i < inProgress.length; i++) {
         let inProgressTask = inProgress[i];
-        renderCardFunction(status, inProgressTask, i);
+        renderCardFunction(status, inProgressTask);
       }
     } else {
       renderEmptyField(status);
@@ -53,7 +53,7 @@ function renderCards() {
     if (awaitFeedback.length > 0) {
       for (let i = 0; i < awaitFeedback.length; i++) {
         let awaitFeedbackTask = awaitFeedback[i];
-        renderCardFunction(status, awaitFeedbackTask, i);
+        renderCardFunction(status, awaitFeedbackTask);
       }
     } else {
       renderEmptyField(status);
@@ -70,7 +70,7 @@ function renderCards() {
     if (done.length > 0) {
       for (let i = 0; i < done.length; i++) {
         let doneTask = done[i];
-        renderCardFunction(status, doneTask, i);
+        renderCardFunction(status, doneTask);
       }
     } else {
       renderEmptyField(status);
@@ -84,12 +84,12 @@ function renderCards() {
    * @param {string} task 
    * @param {number} i 
    */
-  function renderCardFunction(status, task, i) {
+  function renderCardFunction(status, task) {
     document.getElementById(`${status}Cards`).innerHTML += `
-      ${renderHeader(task, i)} 
+      ${renderHeader(task)} 
       ${renderProgressBar(task)} 
-      ${renderAssignedPerson(task, i)} 
-      ${renderPrio(task, i)}`;
+      ${renderAssignedPerson(task)} 
+      ${renderPrio(task)}`;
   }
   
   /**
@@ -165,7 +165,7 @@ function renderHeader(task) {
    */
   function renderProgressBar(task) {
     let finalSubTasks = calcSubtask(task);
-    let sumOfTasks = task["progressValue"].length;
+    let sumOfTasks = task["subtasks"].length;
     if (sumOfTasks > 0) {
       let calcValueOfProgress = calcValueOfProgressbar(finalSubTasks, sumOfTasks);
       return `<div class="progress_bar_card">
@@ -212,10 +212,10 @@ function renderHeader(task) {
    */
   function calcSubtask(task) {
     let sum = 0;
-    let values = task["progressValue"];
+    let values = task["subtasks"];
     if (values.length > 0) {
       for (let i = 0; i < values.length; i++) {
-        let value = values[i];
+        let value = values[i]['checked'];
         sum += value;
       }
     }
@@ -297,9 +297,9 @@ function renderHeader(task) {
    * @returns image of prio 
    */
   function rightPrioImg(task) {
-    if (task["prio"] == "urgent") {
+    if (task["priority"] == "urgent") {
       return "../assets/img/board/PrioUrgent.png";
-    } else if (task["prio"] == "medium") {
+    } else if (task["priority"] == "medium") {
       return "../assets/img/board/PrioMedia.png";
     } else {
       return "../assets/img/board/PrioLight.png";

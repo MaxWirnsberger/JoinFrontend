@@ -89,10 +89,7 @@ async function getUser() {
     redirect: "follow",
   };
   try {
-    const resp = await fetch(
-      CURRENT_URL + "/user-data/",
-      requestOptions
-    )
+    const resp = await fetch(CURRENT_URL + "/user-data/", requestOptions);
     const data = await resp.json();
     return data;
   } catch (e) {
@@ -103,13 +100,60 @@ async function getUser() {
 async function getTasks() {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
-  const requestOptions = {method: "GET", headers: myHeaders, redirect: "follow",};
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
   try {
-    const resp = await fetch(
-    CURRENT_URL + "/tasks/", requestOptions);
+    const resp = await fetch(CURRENT_URL + "/tasks/", requestOptions);
     const data = await resp.json();
     return data;
   } catch (e) {
     console.error(e);
   }
+}
+
+async function updateTask(task, id) {
+  if (id != undefined) {
+    const taskToUpdate = task.find((element) => element.id === id);
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    myHeaders.append("Content-Type", "application/json");
+    debugger
+    const raw = JSON.stringify(taskToUpdate);
+    const requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    try {
+      const resp = await fetch(`${CURRENT_URL}/tasks/${id}/`, requestOptions);
+      const data = await resp.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+async function deleteSubtaskFromDB(id) {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+  myHeaders.append("Content-Type", "application/json");
+  const raw = "";
+  const requestOptions = {
+    method: "DELETE",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+  try {
+    const response = await fetch(`${CURRENT_URL}/subtasks/${id}/`, requestOptions);
+    const result = await response.json();
+    console.error(result);
+  } catch (error) {
+    console.error(error);
+  };
 }

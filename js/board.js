@@ -5,8 +5,8 @@ async function boardInit() {
   checkLogin();
   init();
   await loadTasks();
-  valueAppender();
-  // saveFunction();
+  // valueAppender();
+  saveFunction();
   await getContacts();
   renderContacts();
 }
@@ -14,9 +14,11 @@ async function boardInit() {
 /**
  * When this function is called, it triggers some additional functions that are necessary when saving the values
  */
-async function saveFunction() {
-  setIdFunction();
-  await setItem("tasks", JSON.stringify(tasks));
+async function saveFunction(id) {
+  // setIdFunction();
+  // await setItem("tasks", JSON.stringify(tasks));
+  await updateTask(tasks, id);
+  await loadTasks();
   filterStatus();
   renderCards();
 }
@@ -37,12 +39,12 @@ let wasSubmenuOpen = false;
 /**
  * This function assigns an ID to all tasks
  */
-function setIdFunction() {
-  for (let i = 0; i < tasks.length; i++) {
-    let task = tasks[i];
-    task.id = i;
-  }
-}
+// function setIdFunction() {
+//   for (let i = 0; i < tasks.length; i++) {
+//     let task = tasks[i];
+//     task.id = i;
+//   }
+// }
 
 /**
  * This function divides the tasks into different categories
@@ -59,58 +61,48 @@ function filterStatus() {
  * This function checks whether SubTasks exist and whether they were already known before the last call was saved.
  * If distinctions were found, the function calcValuesToAppend is called
  */
-async function valueAppender() {
-  for (let i = 0; i < tasks.length; i++) {
-    let task = tasks[i];
-    let testSum
-    if (task["subtask"] === null){
-      testSum = 0
-    } else {
-      testSum = task["subtask"].length;
-    }
-    if ("progressValue" in task && task.progressSum != testSum) {
-      let difference = task.progressSum - testSum;
-      calcValuesToAppend(task, difference);
-    } else if ("progressValue" in task && task["progressValue"].length > 0) {
-    } else {
-      task.progressValue = [];
-      task.progressSum = 0;
-      difference = 0;
-      calcValuesToAppend(task, difference);
-    }
-  }
-}
+// async function valueAppender() {
+//   for (let i = 0; i < tasks.length; i++) {
+//     let task = tasks[i];
+//     let testSum = task["subtasks"].length;
+//     if ("progressValue" in task && task.progressSum != testSum) {
+//       let difference = task.progressSum - testSum;
+//       calcValuesToAppend(task, difference);
+//     } else if ("progressValue" in task && task["progressValue"].length > 0) {
+//     } else {
+//       task.progressValue = [];
+//       task.progressSum = 0;
+//       difference = 0;
+//       calcValuesToAppend(task, difference);
+//     }
+//   }
+// }
 
-/**
- * Depending on whether distinctions were found in the valueAppender function. New values ​​are added or deleted here
- *
- * @param {Array} task
- * @param {number} difference
- */
-function calcValuesToAppend(task, difference) {
-  let subtasks
-  if (task["subtask"] === null){
-    subtasks = 0
-  } else {
-    subtasks = task["subtask"];
-  }
-  if (difference < 0) {
-    for (let i = 0; i < -difference; i++) {
-      task.progressValue.push(0);
-    }
-    task.progressSum = subtasks.length;
-  } else if (difference > 0) {
-    for (let i = 0; i < difference; i++) {
-      task.progressValue.splice(subtasks.length, 1);
-    }
-    task.progressSum = subtasks.length;
-  } else {
-    for (let i = 0; i < subtasks.length; i++) {
-      task.progressValue.push(0);
-    }
-    task.progressSum = subtasks.length;
-  }
-}
+// /**
+//  * Depending on whether distinctions were found in the valueAppender function. New values ​​are added or deleted here
+//  *
+//  * @param {Array} task
+//  * @param {number} difference
+//  */
+// function calcValuesToAppend(task, difference) {
+//   let subtasks = task["subtasks"];
+//   if (difference < 0) {
+//     for (let i = 0; i < -difference; i++) {
+//       task.progressValue.push(0);
+//     }
+//     task.progressSum = subtasks.length;
+//   } else if (difference > 0) {
+//     for (let i = 0; i < difference; i++) {
+//       task.progressValue.splice(subtasks.length, 1);
+//     }
+//     task.progressSum = subtasks.length;
+//   } else {
+//     for (let i = 0; i < subtasks.length; i++) {
+//       task.progressValue.push(0);
+//     }
+//     task.progressSum = subtasks.length;
+//   }
+// }
 
 // ########################## Delete and Edit ##########################
 /**
@@ -121,7 +113,7 @@ function calcValuesToAppend(task, difference) {
 async function deleteTask(id) {
   tasks.splice(id, 1);
   closeCardDetails();
-  saveFunction();
+  saveFunction(id);
 }
 
 /**
@@ -173,7 +165,7 @@ function changeButtonToRegularAddTask() {
  * @returns A nice version of the category
  */
 function prettyCategory(category) {
-  if (category == "user_story") {
+  if (category.name == "user_story") {
     return "User Story";
   } else {
     return "Technical Task";
@@ -227,21 +219,37 @@ function changeEditSettings() {
  */
 function saveTaskButton(id) {
   prioCheck();
-  tasks[id]["title"] = taskTitle.value;
-  tasks[id]["description"] = taskDescription.value;
-  tasks[id]["assignedTo"] = assignedTo;
-  tasks[id]["date"] = date.value;
-  tasks[id]["prio"] = taskPrio;
-  tasks[id]["category"] = categoryFromAddTask;
-  tasks[id]["subtask"] = subtasks;
-  statusCheck = tasks[id]["status"];
-  saveFunction();
-  valueAppender();
+  jsonSubtasks = subtaskCheck(subtasks);
+  rightTask = tasks.find((element) => element.id === id);
+  debugger
+  rightTask["title"] = taskTitle.value;
+  rightTask["description"] = taskDescription.value;
+  rightTask["assignedTo"] = assignedTo;
+  rightTask["due_date"] = date.value;
+  rightTask["priority"] = taskPrio;
+  rightTask["category"].name = categoryFromAddTask;
+  rightTask["subtasks"] = jsonSubtasks;
+  statusCheck = rightTask["status"];
+  saveFunction(id);
   showTaskAddedOverlay();
   setTimeout(() => {
     closeAddTaskOverlay();
     hideTaskAddedOverlay();
   }, 1500);
+}
+
+function subtaskCheck(subtasks) {
+  subtaskArray = [];
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtask = subtasks[i];
+    if (!subtask.title) {
+      subtask = {"title": subtask,"checked": false}
+      subtaskArray.push(subtask);
+    } else{
+      subtaskArray.push(subtask);
+    }
+  }
+  return subtaskArray;
 }
 
 // ######################## Overlayer AddTask ##########################
@@ -251,14 +259,15 @@ function saveTaskButton(id) {
  * @param {number} id
  */
 function openEditContactDialog(id) {
-  let titel = tasks[id]["title"];
-  let description = tasks[id]["description"];
-  let assignedToEdit = tasks[id]["assignedTo"];
-  let dueDate = tasks[id]["date"];
-  let prio = tasks[id]["prio"];
-  let category = tasks[id]["category"];
-  let subtasksEdit = tasks[id]["subtask"];
-  statusCheck = tasks[id]["status"];
+  rightTask = tasks.find((element) => element.id === id);
+  let titel = rightTask["title"];
+  let description = rightTask["description"];
+  let assignedToEdit = rightTask["assignedTo"];
+  let dueDate = rightTask["due_date"];
+  let prio = rightTask["priority"];
+  let category = rightTask["category"];
+  let subtasksEdit = rightTask["subtasks"];
+  statusCheck = rightTask["status"];
   fillForm(
     titel,
     description,
@@ -278,7 +287,7 @@ function openEditContactDialog(id) {
  */
 function necessaryFunctionsToEditTasks(id) {
   renderAssignedBadges();
-  renderSubtasksToEdit();
+  renderSubtasksToEdit(id);
   changeTaskButtonOnEdit();
   addAssignedToContacts(id);
   CameFrom = "EditTaskFromBoard";
@@ -302,7 +311,7 @@ async function overlayerAddTask() {
     subtask: subtasks,
     status: statusCheck,
   });
-  saveFunction();
+  createFunction(); // Muss noch definiert werden
   valueAppender();
   showTaskAddedOverlay();
   setTimeout(() => {
@@ -314,7 +323,9 @@ async function overlayerAddTask() {
 /**
  * This function displays the existing subtasks and displays them in the overlayer for editing
  */
-function renderSubtasksToEdit() {
+function renderSubtasksToEdit(id) {
+  let findRightTask = tasks.find((element) => element.id === id);
+  let subtasks = findRightTask["subtasks"];
   if (subtasks.length > 0) {
     let subtaskOutput = document.getElementById("subtaskListContainer");
     for (let i = 0; i < subtasks.length; i++) {
@@ -332,11 +343,10 @@ function renderSubtasksToEdit() {
  * @param {number} i
  */
 function renderSubtasksHTML(subtaskOutput, subtask, i) {
-  let subtaskId = i;
   subtaskOutput.innerHTML += `
-  <div id="subtask_${subtaskId}" class="subtaskContainer d_flex" ondblclick="editSubtask('${subtaskId}')">
-       <li  >${subtask}</li>
-       ${generateSubtaskChange(subtaskId)}
+  <div id="subtask_${subtask.id}" class="subtaskContainer d_flex" ondblclick="editSubtask('${subtask.id}')">
+       <li>${subtask.title}</li>
+       ${generateSubtaskChange(subtask.id)}
   </div>`;
 }
 
@@ -346,7 +356,8 @@ function renderSubtasksHTML(subtaskOutput, subtask, i) {
  * @param {number} id
  */
 function addAssignedToContacts(id) {
-  AssignedPersons = tasks[id].assignedTo;
+  rightTask = tasks.find((element) => element.id === id);
+  AssignedPersons = rightTask.assignedTo;
   for (let i = 0; i < AssignedPersons.length; i++) {
     let AssignedPerson = AssignedPersons[i];
     for (let y = 0; y < contacts.length; y++) {
@@ -358,9 +369,9 @@ function addAssignedToContacts(id) {
 
 /**
  * This function checks whether a person in Contacts has already been assigned to the task that is being processed
- * 
- * @param {string} AssignedPerson 
- * @param {string} contact 
+ *
+ * @param {string} AssignedPerson
+ * @param {string} contact
  */
 function addAssignedTrueTest(AssignedPerson, contact) {
   if (contact.assigned == false || contact.assigned == undefined) {

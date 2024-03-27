@@ -23,10 +23,11 @@ function allowDrop(ev) {
  * @param {string} status
  */
 function moveTo(status) {
-  tasks[currentDraggedElement]["status"] = status;
+  changeStatus = tasks.find(element => element.id === currentDraggedElement)
+  changeStatus["status"] = status;
   let rightID = findIdToRemoveHighlight();
   removeHighlight(rightID);
-  saveFunction();
+  saveFunction(currentDraggedElement);
 }
 
 /**
@@ -53,7 +54,8 @@ function removeHighlight(id) {
  * @returns status of the dropped Card
  */
 function findIdToRemoveHighlight() {
-  let status = tasks[currentDraggedElement]["status"];
+  let rightTask = tasks.find(element => element.id === currentDraggedElement)
+  let status = rightTask["status"];
   if (status == "todo") {
     return "toDoCards";
   } else if (status == "inProgress") {
