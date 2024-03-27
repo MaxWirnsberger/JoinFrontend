@@ -120,7 +120,6 @@ async function updateTask(task, id) {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
     myHeaders.append("Content-Type", "application/json");
-    debugger
     const raw = JSON.stringify(taskToUpdate);
     const requestOptions = {
       method: "PUT",

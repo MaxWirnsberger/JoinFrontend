@@ -178,7 +178,9 @@ function hideTaskAddedOverlay() {
  */
 function setCategory(element) {
   let input = document.getElementById('categoryInput');
-  categoryFromAddTask = element.getAttribute('data-value');
+  let nameOfCategory = element.getAttribute('data-value');
+  let createCategoryArray = {"name": nameOfCategory,"color": "#"}
+  categoryFromAddTask = createCategoryArray
   input.value = element.innerHTML;
   openOverlay();
 }
@@ -234,6 +236,7 @@ function addSubtask() {
 
   subtaskOutput.innerHTML += generateSubtaskContainerHtml(subtaskId, subtask);
   subtasks.push(subtask);
+  // subtaskToSaveOnDB = {"title": subtask,"checked": false, "task": taskOnEdit}
 
   resetSubtaskInput();
 }

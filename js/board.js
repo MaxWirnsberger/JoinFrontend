@@ -219,15 +219,14 @@ function changeEditSettings() {
  */
 function saveTaskButton(id) {
   prioCheck();
-  jsonSubtasks = subtaskCheck(subtasks);
+  jsonSubtasks = subtaskCheck(subtasks, id);
   rightTask = tasks.find((element) => element.id === id);
-  debugger
   rightTask["title"] = taskTitle.value;
   rightTask["description"] = taskDescription.value;
   rightTask["assignedTo"] = assignedTo;
   rightTask["due_date"] = date.value;
   rightTask["priority"] = taskPrio;
-  rightTask["category"].name = categoryFromAddTask;
+  rightTask["category"].name = categoryFromAddTask.name;
   rightTask["subtasks"] = jsonSubtasks;
   statusCheck = rightTask["status"];
   saveFunction(id);
@@ -238,12 +237,12 @@ function saveTaskButton(id) {
   }, 1500);
 }
 
-function subtaskCheck(subtasks) {
+function subtaskCheck(subtasks, taskid) {
   subtaskArray = [];
   for (let i = 0; i < subtasks.length; i++) {
     let subtask = subtasks[i];
     if (!subtask.title) {
-      subtask = {"title": subtask,"checked": false}
+      subtask = {"title": subtask,"checked": false, "task": taskid}
       subtaskArray.push(subtask);
     } else{
       subtaskArray.push(subtask);
