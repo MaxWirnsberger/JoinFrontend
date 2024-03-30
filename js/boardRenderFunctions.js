@@ -114,8 +114,9 @@ function renderCardDetailsAssignedTo(index) {
   let assignedToSection = document.getElementById("assignedToCardName");
   assignedToSection.innerHTML = ``;
   for (let i = 0; i < assignedToArray.length; i++) {
-    let assignedToText = assignedToArray[i].name;
-    let assignedToColor = assignedToArray[i].color;
+    let rightContacts = contacts.find(element => element.id == assignedToArray[i])
+    let assignedToText = rightContacts.name;
+    let assignedToColor = rightContacts.color;
     assignedToSection.innerHTML += `
           <div class="assignedToCardNameValue">
               <div class="assignedToCardCyrcle" 

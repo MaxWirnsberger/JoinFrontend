@@ -315,7 +315,7 @@
   }
 }
 
-@media (max-height: 890px) {
+@media screen and (max-height: 850px) and (max-width:750px) {
   .newContactField_left h2 {
     padding-top: 0;
     font-size: 40px;

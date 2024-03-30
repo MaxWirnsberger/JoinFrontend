@@ -18,9 +18,9 @@ async function initAddTask() {
   checkLogin();
   await init();
   await loadTasks();
-  await getContacts();
+  await getContactsFromDB();
   renderContacts();
-  setPrioBtn(prio_medium, "#FFA800", "prio_medium_white.svg");
+  // setPrioBtn(prio_medium, "#FFA800", "prio_medium_white.svg");
 }
 
 /**
@@ -120,9 +120,11 @@ async function addTask() {
   let title = document.getElementById("taskTitle").value;
   let description = document.getElementById("taskDescription").value;
   let date = document.getElementById("date").value;
+  subtasks = createSubtask(subtasks)
 
   prioCheck();
-  tasks.push({
+  newTask = []
+  newTask.push({
     title: title,
     description: description,
     assignedTo: assignedTo,
@@ -132,9 +134,23 @@ async function addTask() {
     subtask: subtasks,
     status: "todo",
   });
-  await setItem("tasks", JSON.stringify(tasks));
+  // await setItem("tasks", JSON.stringify(tasks));
   clearInput();
   handleTaskAddedOverlay();
+}
+
+function createSubtask(subtasks){
+  subtaskArray = [];
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtask = subtasks[i];
+    if (!subtask.title) {
+      subtask = {"title": subtask,"checked": false}
+      subtaskArray.push(subtask);
+    } else{
+      subtaskArray.push(subtask);
+    }
+  }
+  return subtaskArray;
 }
 
 /**
@@ -347,8 +363,8 @@ function deleteSubtask(subtaskId) {
 /**
  * fetch contacts from remoteStorage
  */
-async function getContacts() {
-  // contacts = JSON.parse(await getItem("contacts"));
+async function getContactsFromDB() {
+  contacts = await getContacts()
 }
 
 /**
@@ -469,7 +485,6 @@ function clearInput() {
  */
 function renderContacts() {
   let contactsOverlay = document.getElementById("contactsContent");
-
   for (let i = 0; i < contacts.length; i++) {
     const contact = contacts[i];
     const initials = getInitials(contact.name);

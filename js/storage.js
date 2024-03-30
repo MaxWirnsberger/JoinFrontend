@@ -1,6 +1,8 @@
 let CURRENT_URL = "http://127.0.0.1:8000";
 let USER_TOKEN = "";
 
+ // ########################################################
+ // ##################### USER ############################# 
 async function registeredUser(emailErrorDiv) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -97,6 +99,8 @@ async function getUser() {
   }
 }
 
+ // ########################################################
+ // ##################### Tasks ############################
 async function getTasks() {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
@@ -137,6 +141,26 @@ async function updateTask(task, id) {
   }
 }
 
+async function deleteTaskFromDB(id) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    myHeaders.append("Content-Type", "application/json");
+    const raw = "";
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    try {
+      await fetch(`${CURRENT_URL}/tasks/${id}/`, requestOptions);
+    } catch (error) {
+      console.error(error);
+    };
+  }
+
+ // ########################################################
+ // ##################### Subtasks #########################
 async function deleteSubtaskFromDB(id) {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
@@ -149,10 +173,88 @@ async function deleteSubtaskFromDB(id) {
     redirect: "follow",
   };
   try {
-    const response = await fetch(`${CURRENT_URL}/subtasks/${id}/`, requestOptions);
-    const result = await response.json();
-    console.error(result);
+    await fetch(`${CURRENT_URL}/subtasks/${id}/`, requestOptions);
   } catch (error) {
     console.error(error);
   };
 }
+
+ // ########################################################
+ // ##################### Contacts #########################
+async function getContacts() {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+    try {
+      const resp = await fetch(CURRENT_URL + "/contacts/", requestOptions);
+      const data = await resp.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+    }
+}
+
+async function createContacts(contact) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify(contact[0]);
+    const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+    };
+    try {
+        const resp = await fetch(`${CURRENT_URL}/contacts/`, requestOptions);
+        const data = await resp.json();
+        return data;
+      } catch (e) {
+        console.error(e);
+      }      
+  }
+
+async function updateContacts(contact, id) {
+    if (id != undefined) {
+      const contactToUpdate = contact.find((element) => element.id === id);
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify(contactToUpdate);
+      const requestOptions = {
+        method: "PUT",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+      try {
+        const resp = await fetch(`${CURRENT_URL}/contacts/${id}/`, requestOptions);
+        const data = await resp.json();
+        return data;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+
+  async function deleteContactFromDB(id) {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    myHeaders.append("Content-Type", "application/json");
+    const raw = "";
+    const requestOptions = {
+      method: "DELETE",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    try {
+      await fetch(`${CURRENT_URL}/contacts/${id}/`, requestOptions);
+    } catch (error) {
+      console.error(error);
+    };
+  }

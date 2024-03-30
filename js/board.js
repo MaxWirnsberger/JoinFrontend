@@ -4,10 +4,10 @@
 async function boardInit() {
   checkLogin();
   init();
+  contacts = await getContacts();
   await loadTasks();
   // valueAppender();
   saveFunction();
-  await getContacts();
   renderContacts();
 }
 
@@ -111,7 +111,8 @@ function filterStatus() {
  * @param {number} id
  */
 async function deleteTask(id) {
-  tasks.splice(id, 1);
+  await deleteTaskFromDB(id)
+  // tasks.splice(id, 1);
   closeCardDetails();
   saveFunction(id);
 }
@@ -261,7 +262,9 @@ function openEditContactDialog(id) {
   rightTask = tasks.find((element) => element.id === id);
   let titel = rightTask["title"];
   let description = rightTask["description"];
-  let assignedToEdit = rightTask["assignedTo"];
+  debugger
+  let assignedToEdit = getRightContactForm(rightTask["assignedTo"])
+  // let assignedToEdit = rightTask["assignedTo"];
   let dueDate = rightTask["due_date"];
   let prio = rightTask["priority"];
   let category = rightTask["category"];
@@ -277,6 +280,17 @@ function openEditContactDialog(id) {
     subtasksEdit
   );
   necessaryFunctionsToEditTasks(id);
+}
+
+function getRightContactForm(contactids){
+  let rightContactForm = []
+  for (let i = 0; i < contactids.length; i++) {
+    const contactid = contactids[i];
+    let rightContact = contacts.find(element => element.id == contactid)
+    rightContactForm.push(rightContact)
+  }
+  debugger
+  return rightContactForm
 }
 
 /**

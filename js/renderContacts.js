@@ -130,8 +130,9 @@ function showName(id) {
       let name = contacts[i]["name"];
       let email = contacts[i]["email"];
       let color = contacts[i]["color"];
+      let id = contacts[i]["id"];
       if (name.toLowerCase().charAt(0).includes(letter)) {
-        renderContactNames(i, name, email, color);
+        renderContactNames(id, name, email, color);
       }
     }
   }
@@ -139,16 +140,16 @@ function showName(id) {
   /**
    * Renders the contact names in the list
    * 
-   * @param {number} i 
+   * @param {number} id 
    * @param {string} name 
    * @param {string} email 
    * @param {number} color 
    */
-  function renderContactNames(i, name, email, color) {
+  function renderContactNames(id, name, email, color) {
     document.getElementById(
       `contact_Users(${initials(name, 0)})`
     ).innerHTML += `<div class="centersizer">
-      <div onclick="showName(${i})" id="name${i}" class="name_contant">
+      <div onclick="showName(${id})" id="name${id}" class="name_contant">
           <div class="nameIcon_leftContainer" style=background-color:#${color}>${
       initials(name, 0) + initials(name, 1)
     }</div>
@@ -178,16 +179,15 @@ function showName(id) {
    * @param {number} id 
    */
   function renderContactInformation(id) {
-    if (id >= 0 && id < contacts.length) {
-      let name = contacts[id]["name"];
-      let color = contacts[id]["color"];
-      renderBigCircle(name, color);
-      document.getElementById("name_rightContainer").innerHTML = name;
-      renderEditDelete(id);
-      renderResponseEditDelete(id);
-      renderEmail(id);
-      renderPhone(id);
-    }
+    let rightContact = contacts.find(element => element.id == id)
+    let name = rightContact["name"];
+    let color = rightContact["color"];
+    renderBigCircle(name, color);
+    document.getElementById("name_rightContainer").innerHTML = name;
+    renderEditDelete(id);
+    renderResponseEditDelete(id);
+    renderEmail(id);
+    renderPhone(id);
   }
   
   /**
@@ -253,7 +253,8 @@ function showName(id) {
    * @param {number} id 
    */
   function renderEmail(id) {
-    let email = contacts[id]["email"];
+    let rightContact = contacts.find(element => element.id == id)
+    let email = rightContact["email"];
     document.getElementById("email_rightContainer").innerHTML = "";
     document.getElementById("email_rightContainer").innerHTML = `
       <span>Email</span>
@@ -268,10 +269,11 @@ function showName(id) {
    * @param {number} id 
    */
   function renderPhone(id) {
-    let tel = contacts[id]["tel"];
+    let rightContact = contacts.find(element => element.id == id)
+    let tel = rightContact["phone"];
     document.getElementById("phone_rightContainer").innerHTML = "";
     document.getElementById("phone_rightContainer").innerHTML = `
-      <span>Email</span>
+      <span>Phone</span>
       <a href="mailto:${tel}?subject=Feedback&body=Message">
           ${tel}
       </a>`;

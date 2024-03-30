@@ -245,7 +245,7 @@ function renderHeader(task) {
     let assignedToHTML = "";
     loopValue = calclenghOfPersonList(task)
     for (let i = 0; i < loopValue; i++) {
-      let assignedTo = task["assignedTo"][i];
+      let assignedTo = contacts.find(element => element.id == task["assignedTo"][i])
       assignedToHTML += `<div class="assigned_person" 
         style = "background-color: #${assignedTo.color};">${
         initialsAssignedTo(assignedTo.name, 0) +

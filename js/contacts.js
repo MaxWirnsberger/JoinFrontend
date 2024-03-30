@@ -17,11 +17,11 @@ async function contactInit() {
 
 // ############## Load, Save or Change User Contacts #########################
 /**
- * Loads the contacts in the variable "contacts" 
+ * Loads the contacts in the variable "contacts"
  */
 async function loadContacts() {
   try {
-    contacts = JSON.parse(await getItem("contacts"));
+    contacts = await getContacts();
     sortNames(contacts);
   } catch (e) {
     console.info("Could not load Contacts");
@@ -30,8 +30,8 @@ async function loadContacts() {
 
 /**
  * Sort the names in alphabetical order
- * 
- * @param {string} contacts 
+ *
+ * @param {string} contacts
  */
 async function sortNames(contacts) {
   contacts.sort(function (a, b) {
@@ -54,8 +54,13 @@ async function saveContact() {
   createButton.disabled = true;
   let color = Math.floor(Math.random() * 16777215).toString(16);
   contactNameUppercase = capitalizedName(contactName.value);
-  pushContacts(contactNameUppercase, contactEmail, contactTel, color);
-  await setItem("contacts", JSON.stringify(contacts));
+  let newContact = pushContacts(
+    contactNameUppercase,
+    contactEmail,
+    contactTel,
+    color
+  );
+  await createContacts(newContact);
   resetForm();
   filterLetters = [];
   await contactInit();
@@ -65,19 +70,21 @@ async function saveContact() {
 
 /**
  * pushed new values ​​into existing array "contacts"
- * 
- * @param {string} contactNameUppercase 
- * @param {string} contactEmail 
- * @param {number} contactTel 
- * @param {number} color 
+ *
+ * @param {string} contactNameUppercase
+ * @param {string} contactEmail
+ * @param {number} contactTel
+ * @param {number} color
  */
 function pushContacts(contactNameUppercase, contactEmail, contactTel, color) {
-  contacts.push({
+  let newContact = [];
+  newContact.push({
     name: contactNameUppercase,
     email: contactEmail.value,
-    tel: contactTel.value,
+    phone: contactTel.value,
     color: color,
   });
+  return newContact;
 }
 
 /**
@@ -92,8 +99,8 @@ function resetForm() {
 
 /**
  * Make sure all names are capitalized
- * 
- * @param {string} Name 
+ *
+ * @param {string} Name
  * @returns capitalized name
  */
 function capitalizedName(Name) {
@@ -107,14 +114,16 @@ function capitalizedName(Name) {
 
 /**
  * changes the values ​​of the existing contacts
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 async function changeSavedContact(id) {
-  contacts[id].name = contactName.value;
-  contacts[id].email = contactEmail.value;
-  contacts[id].tel = contactTel.value;
-  await setItem("contacts", JSON.stringify(contacts));
+  let rightContact = contacts.find((element) => element.id == id);
+  rightContact.name = contactName.value;
+  rightContact.email = contactEmail.value;
+  rightContact.phone = contactTel.value;
+  await updateContacts(contacts, id);
+  // await setItem("contacts", JSON.stringify(contacts));
   filterLetters = [];
   await contactInit();
   showName(id);
@@ -176,8 +185,8 @@ function createCreateContactForm() {
     return false;" >
     <input class="input_name" required pattern="[A-Za-zÄäÖöÜüß]+ [A-Za-zÄäÖöÜüß]+" id="contactName"
       type="text" placeholder="Firstname Secondname"/>
-    <input class="input_email" required id="contactEmail" type="email"
-      placeholder="Email" />
+      <input class="input_email" required pattern="[^@\s]+@[^@\s]+\.[^@\s]+" id="contactEmail" 
+      type="email" placeholder="Email" />
     <input class="input_tel" required id="contactTel" type="number"
       placeholder="Phone" />
     <div class="newContactButtons" id="OverlayerButtons"></div>
@@ -204,14 +213,15 @@ function changeButtonOnCreate() {
 
 /**
  * Opens the dialog to change values ​​of an existing contact
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 function openEditContactDialog(id) {
-  let name = contacts[id]["name"];
-  let email = contacts[id]["email"];
-  let phone = contacts[id]["tel"];
-  let color = contacts[id]["color"];
+  let rightContact = contacts.find((element) => element.id == id);
+  let name = rightContact["name"];
+  let email = rightContact["email"];
+  let phone = rightContact["phone"];
+  let color = rightContact["color"];
   editLeftSideOfOverlayerForEdit();
   changeCycleId(name, color);
   createChangeContactForm(id);
@@ -236,9 +246,9 @@ function editLeftSideOfOverlayerForEdit() {
 
 /**
  * Changes the values ​​in the overlayer's cycle when the Edit button is pressed
- * 
- * @param {string} name 
- * @param {number} color 
+ *
+ * @param {string} name
+ * @param {number} color
  */
 function changeCycleId(name, color) {
   let cycle = document.getElementById("newContact_cycle");
@@ -249,8 +259,8 @@ function changeCycleId(name, color) {
 
 /**
  * Creates the form for edit an existing contact
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 function createChangeContactForm(id) {
   OverlayerButtons = document.getElementById("contactForm");
@@ -270,10 +280,10 @@ function createChangeContactForm(id) {
 
 /**
  * Changes the values ​​in the created form
- * 
- * @param {string} name 
- * @param {string} email 
- * @param {number} phone 
+ *
+ * @param {string} name
+ * @param {string} email
+ * @param {number} phone
  */
 function fillForm(name, email, phone) {
   document.getElementById("contactName").value = "";
@@ -286,8 +296,8 @@ function fillForm(name, email, phone) {
 
 /**
  * Creates the necessary buttons when eding a contact
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 function changeButtonOnEdit(id) {
   OverlayerButtons = document.getElementById("OverlayerButtons");
@@ -304,20 +314,20 @@ function changeButtonOnEdit(id) {
 
 /**
  * This function is executed when the delete button is pressed and deletes the selected contact
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 async function deleteContact(id) {
+  await deleteContactFromDB(id);
   contacts.splice(id, 1);
-  await setItem("contacts", JSON.stringify(contacts));
   removeOptionsAfterDelete(id);
   closeButton();
 }
 
 /**
  * For some necessary functions when the contact has been deleted
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  */
 function removeOptionsAfterDelete(id) {
   filterLetters = [];
@@ -376,10 +386,11 @@ window.addEventListener("resize", function () {
   if (screenWidth >= 750) {
     document.getElementById("left_container").classList.remove("display_none");
   } else if (screenWidth <= 750) {
-    document.getElementById("editDeletOverlay").classList.remove("display_flex");
+    document
+      .getElementById("editDeletOverlay")
+      .classList.remove("display_flex");
     document
       .getElementById("right_container")
       .classList.remove("display_block");
   }
 });
-
