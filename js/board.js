@@ -8,7 +8,6 @@ async function boardInit() {
   await loadTasks();
   // valueAppender();
   saveFunction();
-  renderContacts();
 }
 
 /**
@@ -21,6 +20,7 @@ async function saveFunction(id) {
   await loadTasks();
   filterStatus();
   renderCards();
+  renderContacts();
 }
 
 // ####################### Filter Cards on Status ######################
@@ -111,7 +111,7 @@ function filterStatus() {
  * @param {number} id
  */
 async function deleteTask(id) {
-  await deleteTaskFromDB(id)
+  await deleteTaskFromDB(id);
   // tasks.splice(id, 1);
   closeCardDetails();
   saveFunction(id);
@@ -221,10 +221,11 @@ function changeEditSettings() {
 function saveTaskButton(id) {
   prioCheck();
   jsonSubtasks = subtaskCheck(subtasks, id);
+  let getAssignedToID = getContactIDs(assignedTo);
   rightTask = tasks.find((element) => element.id === id);
   rightTask["title"] = taskTitle.value;
   rightTask["description"] = taskDescription.value;
-  rightTask["assignedTo"] = assignedTo;
+  rightTask["assignedTo"] = getAssignedToID;
   rightTask["due_date"] = date.value;
   rightTask["priority"] = taskPrio;
   rightTask["category"].name = categoryFromAddTask.name;
@@ -232,6 +233,7 @@ function saveTaskButton(id) {
   statusCheck = rightTask["status"];
   saveFunction(id);
   showTaskAddedOverlay();
+  assignedTo = []
   setTimeout(() => {
     closeAddTaskOverlay();
     hideTaskAddedOverlay();
@@ -243,13 +245,22 @@ function subtaskCheck(subtasks, taskid) {
   for (let i = 0; i < subtasks.length; i++) {
     let subtask = subtasks[i];
     if (!subtask.title) {
-      subtask = {"title": subtask,"checked": false, "task": taskid}
+      subtask = { title: subtask, checked: false, task: taskid };
       subtaskArray.push(subtask);
-    } else{
+    } else {
       subtaskArray.push(subtask);
     }
   }
   return subtaskArray;
+}
+
+function getContactIDs(contacts) {
+  let getAssignedToID = [];
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    getAssignedToID.push(contact.id);
+  }
+  return getAssignedToID;
 }
 
 // ######################## Overlayer AddTask ##########################
@@ -259,12 +270,10 @@ function subtaskCheck(subtasks, taskid) {
  * @param {number} id
  */
 function openEditContactDialog(id) {
-  rightTask = tasks.find((element) => element.id === id);
+  let rightTask = tasks.find((element) => element.id === id);
   let titel = rightTask["title"];
   let description = rightTask["description"];
-  debugger
-  let assignedToEdit = getRightContactForm(rightTask["assignedTo"])
-  // let assignedToEdit = rightTask["assignedTo"];
+  let assignedToEdit = getRightContactForm(rightTask["assignedTo"]);
   let dueDate = rightTask["due_date"];
   let prio = rightTask["priority"];
   let category = rightTask["category"];
@@ -282,15 +291,14 @@ function openEditContactDialog(id) {
   necessaryFunctionsToEditTasks(id);
 }
 
-function getRightContactForm(contactids){
-  let rightContactForm = []
+function getRightContactForm(contactids) {
+  let rightContactForm = [];
   for (let i = 0; i < contactids.length; i++) {
     const contactid = contactids[i];
-    let rightContact = contacts.find(element => element.id == contactid)
-    rightContactForm.push(rightContact)
+    let rightContact = contacts.find((element) => element.id == contactid);
+    rightContactForm.push(rightContact);
   }
-  debugger
-  return rightContactForm
+  return rightContactForm;
 }
 
 /**
@@ -313,23 +321,27 @@ async function overlayerAddTask() {
   let title = document.getElementById("taskTitle").value;
   let description = document.getElementById("taskDescription").value;
   let date = document.getElementById("date").value;
+  let assignedToSave = getContactIDs(assignedTo);
+  let newSubtasks = createSubtask(subtasks);
   prioCheck();
-  tasks.push({
+  newTask = {
     title: title,
     description: description,
-    assignedTo: assignedTo,
+    assignedTo: assignedToSave,
     date: date,
     prio: taskPrio,
     category: categoryFromAddTask,
-    subtask: subtasks,
+    subtasks: newSubtasks,
     status: statusCheck,
-  });
-  createFunction(); // Muss noch definiert werden
-  valueAppender();
+  };
+  createTask(newTask);
+  assignedTo = [];
+  // valueAppender();
   showTaskAddedOverlay();
   setTimeout(() => {
     closeAddTaskOverlay();
     hideTaskAddedOverlay();
+    saveFunction();
   }, 1500);
 }
 
@@ -357,7 +369,9 @@ function renderSubtasksToEdit(id) {
  */
 function renderSubtasksHTML(subtaskOutput, subtask, i) {
   subtaskOutput.innerHTML += `
-  <div id="subtask_${subtask.id}" class="subtaskContainer d_flex" ondblclick="editSubtask('${subtask.id}')">
+  <div id="subtask_${
+    subtask.id
+  }" class="subtaskContainer d_flex" ondblclick="editSubtask('${subtask.id}')">
        <li>${subtask.title}</li>
        ${generateSubtaskChange(subtask.id)}
   </div>`;

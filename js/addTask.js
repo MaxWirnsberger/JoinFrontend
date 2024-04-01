@@ -36,34 +36,44 @@ async function loadTasks() {
  */
 function openAssignedInput() {
   let options = document.getElementById("contactsOverlay");
-
   options.classList.toggle("d_none");
-
-  for (let i = 0; i < contacts.length; i++) {
-    if (contacts[i].assigned) {
-      markContactAssigned(i);
-    } else {
-      unmarkContactAssigned(i);
+  if (assignedTo.length > 0) {
+    for (let i = 0; i < assignedTo.length; i++) {
+      const assignedToID = assignedTo[i].id;
+      let findmarkedContact = contacts.find(element => element.id == assignedToID)
+      if (findmarkedContact) {
+        markContactAssigned(findmarkedContact);
+      } else {
+        unmarkContactAssigned(findmarkedContact);
+      }
+    }
+  } else {
+    for (let i = 0; i < contacts.length; i++) {
+      const element = contacts[i];
+      unmarkContactAssigned(element); 
     }
   }
+  
 }
 
 /**
  * set a contact as assigned
- * @param {number} i 
+ * @param {number} id 
  */
-function assign(i) {
-  contacts[i].assigned = !contacts[i].assigned;
+function assign(id) {
+  let findmarkedContact = assignedTo.find(element => element.id == id)
+  // rightContact.assigned = !rightContact.assigned;
 
-  if (contacts[i].assigned) {
-    markContactAssigned(i);
-    assignedTo.push(contacts[i]);
-  } else {
-    unmarkContactAssigned(i);
-    let indexToRemove = assignedTo.findIndex(contact => contact.email === contacts[i]["email"]);
+  if (findmarkedContact) {
+    unmarkContactAssigned(findmarkedContact);
+    let indexToRemove = assignedTo.findIndex(contact => contact.id == findmarkedContact["id"]);
     if (indexToRemove !== -1) {
       assignedTo.splice(indexToRemove, 1);
     }
+  } else {
+    let unmarkedContact = contacts.find(element => element.id == id)
+    markContactAssigned(unmarkedContact);
+    assignedTo.push(unmarkedContact);
   }
   renderAssignedBadges();
 }
@@ -72,9 +82,9 @@ function assign(i) {
  * change css properties when assigned
  * @param {number} i 
  */
-function markContactAssigned(i) {
-  let contactContainer = document.getElementById(`contact${i}`);
-  let checkbox = document.getElementById(`assignedCechbox${i}`);
+function markContactAssigned(contact) {
+  let contactContainer = document.getElementById(`contact${contact['id']}`);
+  let checkbox = document.getElementById(`assignedCechbox${contact['id']}`);
 
   contactContainer.classList.add("contactAktive");
   contactContainer.style.backgroundColor = "#2A3647";
@@ -85,9 +95,9 @@ function markContactAssigned(i) {
  * change css proberties to initially
  * @param {number} i 
  */
-function unmarkContactAssigned(i) {
-  let contactContainer = document.getElementById(`contact${i}`);
-  let checkbox = document.getElementById(`assignedCechbox${i}`);
+function unmarkContactAssigned(contact) {
+  let contactContainer = document.getElementById(`contact${contact['id']}`);
+  let checkbox = document.getElementById(`assignedCechbox${contact['id']}`);
 
   contactContainer.classList.remove("contactAktive");
   contactContainer.style.backgroundColor = "";
@@ -120,23 +130,32 @@ async function addTask() {
   let title = document.getElementById("taskTitle").value;
   let description = document.getElementById("taskDescription").value;
   let date = document.getElementById("date").value;
-  subtasks = createSubtask(subtasks)
-
+  let assignedToSave = getContactIDs(assignedTo);
+  let newSubtasks = createSubtask(subtasks)
   prioCheck();
-  newTask = []
-  newTask.push({
+  newTask = {
     title: title,
     description: description,
-    assignedTo: assignedTo,
+    assignedTo: assignedToSave,
     date: date,
     prio: taskPrio,
     category: categoryFromAddTask,
-    subtask: subtasks,
+    subtasks: newSubtasks,
     status: "todo",
-  });
-  // await setItem("tasks", JSON.stringify(tasks));
+  };
+  assignedTo = []
+  createTask(newTask)
   clearInput();
   handleTaskAddedOverlay();
+}
+
+function getContactIDs(contacts) {
+  let getAssignedToID = [];
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+    getAssignedToID.push(contact.id);
+  }
+  return getAssignedToID;
 }
 
 function createSubtask(subtasks){
@@ -489,7 +508,7 @@ function renderContacts() {
     const contact = contacts[i];
     const initials = getInitials(contact.name);
 
-    contactsOverlay.innerHTML += generateContactsHTML(i, contact, initials);
+    contactsOverlay.innerHTML += generateContactsHTML(contact, initials);
   }
 }
 
@@ -500,15 +519,15 @@ function renderContacts() {
  * @param {String} initials 
  * @returns htmlTemplate
  */
-function generateContactsHTML(i, contact, initials) {
+function generateContactsHTML(contact, initials) {
   return /*html*/ `
-         <div class="contact d_flex" id='contact${i}' onclick="assign(${i})">
+         <div class="contact d_flex" id='contact${contact.id}' onclick="assign(${contact.id})">
                  <div class="contactLeft d_flex">
                      <div class="contactBadge" style="background-color: #${contact.color};">${initials}</div>
                     <div class="contactName"><span>${contact.name}</span></div>
                  </div>
                 <div class="contactRight">
-                    <img id="assignedCechbox${i}" src="../assets/img/addTask_icons/check_button.png" alt="">
+                    <img id="assignedCechbox${contact.id}" src="../assets/img/addTask_icons/check_button.png" alt="">
                 </div>
             </div>
     `;

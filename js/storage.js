@@ -159,6 +159,24 @@ async function deleteTaskFromDB(id) {
     };
   }
 
+  async function createTask(task){
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Token ${USER_TOKEN}`);
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify(task);
+    const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+    };
+    try {
+        await fetch(`${CURRENT_URL}/tasks/`, requestOptions);
+      } catch (e) {
+        console.error(e);
+      }      
+  }
+
  // ########################################################
  // ##################### Subtasks #########################
 async function deleteSubtaskFromDB(id) {
